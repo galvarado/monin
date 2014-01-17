@@ -4,7 +4,8 @@ from django.conf import settings
 import re
 
 urlpatterns = patterns('main.views',
-    url(r'^$', 'index', name='indez'),
+    url(r'^$', 'index', name='index'),
+    url(r'^zohoverify/verifyforzoho.html$', 'zohoverify', name='zohoverify'),
 )
 
 # Static files serve
