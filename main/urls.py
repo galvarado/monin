@@ -5,6 +5,7 @@ import re
 
 urlpatterns = patterns('main.views',
     url(r'^$', 'index', name='index'),
+    url(r'^home/?$', 'home', name='home'),
     url(r'^zohoverify/verifyforzoho.html$', 'zohoverify', name='zohoverify'),
 )
 

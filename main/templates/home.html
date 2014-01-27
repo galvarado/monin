@@ -1,3 +1,4 @@
+{% load i18n %}
 <!doctype html>  
 
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ --> 
@@ -36,9 +37,17 @@
     <div id="header">
         <div id="logo"><a href="index.html"><img src="{{ STATIC_URL }}images/logo.png" alt="" /></a></div>
         <div id="personal_data">
-            <img class="flag" src="{{ STATIC_URL }}images/usa.png" alt="" /><img class="flag" src="{{ STATIC_URL }}images/mex.png" alt="" /></p>
         </div>
     </div>
+    <div id="menu" class="png_bg">
+      <ul>
+        <li class="selected"><a href="{% url 'home' %}">{% trans "Inicio" %}</a></li>
+        <li><a href="">{% trans "Nosotros" %}</a>
+        <li><a href="">{% trans "Productos" %}</a>
+        <li><a href="">{% trans "Acceso a Clientes" %}</a>
+        <li><a href="">{% trans "Contacto" %}</a>
+      </ul>
+  </div>
     <!-- /Header -->
     <!-- Main content alpha -->
     <div class="main png_bg">
