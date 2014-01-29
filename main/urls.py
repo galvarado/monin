@@ -6,6 +6,7 @@ import re
 urlpatterns = patterns('main.views',
     url(r'^$', 'index', name='index'),
     url(r'^home/?$', 'home', name='home'),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^zohoverify/verifyforzoho.html$', 'zohoverify', name='zohoverify'),
 )
 

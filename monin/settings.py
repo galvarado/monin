@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+from django.utils.translation import ugettext_lazy as _
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -76,6 +77,14 @@ DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'es'
+LOCALE_PATHS = (
+    'locale',
+)
+
+LANGUAGES = (
+  ('es', _('Espanol')),
+  ('en', _('Ingles')),
+)
 
 TIME_ZONE = 'UTC'
 
