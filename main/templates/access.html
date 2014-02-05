@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block menu %}
+<div id="menu" class="png_bg">
+  <ul>
+    <li class="selected"><a href="{% url 'home' %}">{% trans "Inicio" %}</a></li>
+    <li><a href="{% url 'our' %}">{% trans "Nosotros" %}</a>
+    <li><a href="{% url 'access' %}">{% trans "Productos" %}</a>
+    <li><a href="{% url 'clients' %}">{% trans "Acceso a Clientes" %}</a>
+    <li><a href="{% url 'contact' %}">{% trans "Contacto" %}</a>
+  </ul>
+</div>
+{% endblock menu %}
+{% block main-content %}
+<div class="container_omega">
+    <div class="gs_4"><h3>Datos requeridos</h3>
+    <!-- Contact form starts -->
+        <form method="post" action="{% url 'access' %}">
+            <div id="form_container">
+                <div id="form_main">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {{ field.label }}
+                    {{ field }}
+                    {% if field.errors %}
+                    {% for error in field.errors %}
+                    {{ error }}
+                    {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+                    <p><input type="submit" id="submit" value="Enviar" class="superbutton"></p>
+                    <ul id="form_response"><li></li></ul>
+                </div>
+            </div>
+        </form>
+    <!-- Contact form Ends -->
+    </div>
+</div>
+{% endblock main-content %}

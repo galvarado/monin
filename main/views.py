@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from main.forms import AccessForm
+
 def index(request):
     '''
     Shows index page
@@ -12,8 +14,40 @@ def home(request):
     '''
     return render(request, "home.html")
 
-def zohoverify(request):
+def our(request):
     '''
-    Shows index page
+    Shows our page
     '''
-    return render(request, "verifyforzoho.html")
+    return render(request, "our.html")
+
+def access(request):
+    '''
+    Shows access page
+    '''
+    form = AccessForm()
+    if request.method == 'POST':
+        form = AccessForm(request.POST)
+        if form.is_valid():
+            return redirect('products')
+    return render(request, "access.html", {
+        'form': form,
+    })
+
+def clients(request):
+    '''
+    Shows clients page
+    '''
+    return render(request, "clients.html")
+
+def products(request):
+    '''
+    Shows products page
+    '''
+    return render(request, "products.html")
+
+def contact(request):
+    '''
+    Shows contact page
+    '''
+    return render(request, "contact.html")
+

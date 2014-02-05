@@ -48,6 +48,7 @@
     <div class="main png_bg">
         <div class="inner_main">
         <!-- True containers (keep the content inside containers!) -->
+            {% block main-content %}
             <div class="container_alpha slider">
                 <div id="slider" class="nivoSlider">
                     <img src="{{ STATIC_URL }}images/slides/slide1.png" alt=""/>
@@ -56,6 +57,7 @@
                 </div>
                 <div class="loader"></div>
             </div>
+            {% endblock main-content %}
         </div>
         <!-- /True containers (keep the content inside containers!) -->
     </div>
