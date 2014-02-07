@@ -1,3 +1,4 @@
+# coding: utf-8
 """
 Django settings for monin project.
 
@@ -26,7 +27,6 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -119,6 +119,16 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+FROM = 'info@monin.com.mx'
+TO = 'guillermoalvarado89@gmail.com'
+SUBJECT = '[Monin] Aviso de la página'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.environ.get('SENDGRID_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 if os.environ.get('DEVELOPMENT_ENVIRONMENT') and os.environ.get('DEVELOPMENT_ENVIRONMENT') == 'True':
     from local_settings import *
