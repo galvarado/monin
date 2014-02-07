@@ -27,7 +27,7 @@ def access(request):
     Shows access page
     '''
     if request.session.get('has_access') == True:
-        pass #return redirect('products')
+        return redirect('products')
 
     form = AccessForm()
     if request.method == 'POST':
