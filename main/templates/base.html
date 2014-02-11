@@ -42,6 +42,15 @@
         </div>
     </div>
     {% block menu %}
+    <div id="menu" class="png_bg">
+      <ul>
+        <li class="selected"><a href="{% url 'home' %}">{% trans "Inicio" %}</a></li>
+        <li><a href="{% url 'our' %}">{% trans "Nosotros" %}</a>
+        <li><a href="{% url 'access' %}">{% trans "Productos" %}</a>
+        <li><a href="{% url 'clients' %}">{% trans "Acceso a Clientes" %}</a>
+        <li><a href="{% url 'contact' %}">{% trans "Contacto" %}</a>
+      </ul>
+    </div>
     {% endblock menu %}
     <!-- /Header -->
     <!-- Main content alpha -->
