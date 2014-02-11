@@ -44,11 +44,17 @@
     {% block menu %}
     <div id="menu" class="png_bg">
       <ul>
-        <li class="selected"><a href="{% url 'home' %}">{% trans "Inicio" %}</a></li>
-        <li><a href="{% url 'our' %}">{% trans "Nosotros" %}</a>
-        <li><a href="{% url 'access' %}">{% trans "Productos" %}</a>
-        <li><a href="{% url 'clients' %}">{% trans "Acceso a Clientes" %}</a>
-        <li><a href="{% url 'contact' %}">{% trans "Contacto" %}</a>
+        {% url 'home' as url %}
+        <li {% if request.path == url %}class="selected"{% endif %}><a href="{{ url }}">{% trans "Inicio" %}</a></li>
+        {% url 'our' as url %}
+        <li {% if request.path == url %}class="selected"{% endif %}><a href="{{ url }}">{% trans "Nosotros" %}</a>
+        {% url 'access' as url %}
+        {% url 'products' as url2 %}
+        <li {% if request.path == url or request.path == url2 %}class="selected"{% endif %}><a href="{{ url }}">{% trans "Productos" %}</a>
+        {% url 'clients' as url %}
+        <li {% if request.path == url %}class="selected"{% endif %}><a href="{{ url }}">{% trans "Acceso a Clientes" %}</a>
+        {% url 'contact' as url %}
+        <li {% if request.path == url %}class="selected"{% endif %}><a href="{{ url }}">{% trans "Contacto" %}</a>
       </ul>
     </div>
     {% endblock menu %}
@@ -86,7 +92,7 @@
     <script src="js/libs/dd_belatedpng.js"></script>
     <script> DD_belatedPNG.fix('img, .png_bg, .sidebar, .sidebar ul, .sidebar ul li, .sidebar ul li a'); //fix any <img> or .png_bg background-images </script>
   <![endif]-->
-  {% block js %}
+  {% endblock js %}
 
 </body>
 </html>

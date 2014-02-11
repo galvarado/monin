@@ -2244,6 +2244,92 @@ margin: 5px 0 8px;
 Own styles
 */
 
+table{
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-weight: normal;
+}
+
+a{
+    text-decoration: none;
+}
+
+nav li{
+    list-style-type: none;
+    display: inline-block;
+}
+
+
+
+p{
+    width: 500px;
+    margin: 0 0 30px;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.controls{
+    display: inline-block;
+    width: 180px;
+    margin: 0 0 30px;
+    vertical-align: top;
+}
+
+.controls li{
+    margin-left: 20px;
+    cursor: pointer;
+    list-style-type: square;
+}
+
+.controls li.active{
+    font-weight: 700;
+}
+
+hr{
+    margin: 0 0 30px;
+    height: 0;
+    border: 0 none;
+    border-top: 1px solid #000;
+}
+
+#Grid{
+    width: 940px;
+    text-align: justify;
+    font-size: 0.1px;
+}
+
+#Grid:after{
+    content: '';
+    display: inline-block;
+    width: 100%;
+}
+
+#Grid .mix{
+    display: none;
+    opacity: 0;
+    width: 200px;
+    height: 200px;
+    vertical-align: top;
+    margin-bottom: 20px;
+    background: #ccc;
+    color: #fff;
+    
+    font-size: 30px;
+    text-align: center;
+    line-height: 200px;
+}
+
+#Grid .gap{
+    display: inline-block;
+    width: 200px;
+}
+.categories img {
+    height: 200px;
+    width: 200px;
+}
 .personal_data {
 vertical-align: middle;
 
@@ -2255,4 +2341,21 @@ vertical-align: middle;
 
 #header form {
     float: right;
+}
+
+.menu2 {
+    background: none !important;
+    margin-bottom: 20px !important;
+}
+.menu2 li {
+    cursor: pointer;
+}
+
+.menu2 .menu_box_left {
+    background: none !important;
+    display: none !important;
+}
+
+.menu2 .menu_box_left_bg {
+    background: none !important;
 }
