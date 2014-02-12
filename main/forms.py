@@ -5,16 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 
 class AuthForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        "class": "input",
-        "placeholder": "Usuario...",
-        "size": "26",
-    }))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
-        "class": "input",
-        "placeholder": "Contraseña...",
-        "size": "26",
-    }))
+    username = forms.CharField(label='Número de cliente')
+    password = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
 
 class AccessForm(forms.Form):
     name = forms.CharField(label='Nombre')

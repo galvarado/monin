@@ -5,11 +5,13 @@ import re
 
 urlpatterns = patterns('main.views',
     url(r'^$', 'index', name='index'),
+    url(r'^logout/?$', 'logout', name='logout'),
     url(r'^home/?$', 'home', name='home'),
     url(r'^our/?$', 'our', name='our'),
     url(r'^access/?$', 'access', name='access'),
     url(r'^products/?$', 'products', name='products'),
     url(r'^clients/?$', 'clients', name='clients'),
+    url(r'^order/?$', 'order', name='order'),
     url(r'^contact/?$', 'contact', name='contact'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
 )
