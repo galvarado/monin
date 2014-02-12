@@ -896,7 +896,7 @@ zoom:1;
 }
 
 .main{
-width:956px;
+width:972px;
 padding:0 12px;
 background:url(img/main_background.png) repeat-y scroll 0 0 transparent;
 z-index:987;
@@ -2239,7 +2239,35 @@ margin: 5px 0 10px;
 div.toggler h3{
 margin: 5px 0 8px;
 }
+/*=====================Custom styles to datatable=====================*/
+.dataTables_length label {
+  select {
+    width: 60px;
+    background-color: @white;
+    border: 1px solid #CCC;
+  }
+}
 
+.dataTables_filter label {
+    float: right;
+}
+
+.dataTables_paginate {
+  float: right;
+}
+
+.sorting_asc, .sorting_desc, .sorting {
+  background: url('img/icon_order.gif') no-repeat top right @gray !important;
+  cursor: pointer;
+}
+
+.dataTables_processing {
+  width: 200px;
+  background: @grayLighter;
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
 /*
 Own styles
 */

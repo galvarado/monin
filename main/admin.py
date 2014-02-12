@@ -1,3 +1,4 @@
-from django.contrib import admin
+from main.autoregister import autoregister
 
-# Register your models here.
+# register all models defined on each app
+autoregister('main')

@@ -1,10 +1,14 @@
+import json
+
 from django.conf import settings
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib.auth import logout as auth_logout, login as auth_login
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.http import HttpResponseRedirect, HttpResponse , Http404
 
 from main.forms import AccessForm, AuthForm
+from main.models import Product
 
 # Auth views
 
@@ -141,6 +145,50 @@ def products(request):
     if not request.session.get('has_access') == True:
         return redirect('access')
     return render(request, "products.html")
+
+@login_required
+def products_all(request):
+    '''
+    Retrive all products to fill the products table
+    '''
+    aaData = []
+    start = request.POST.get('iDisplayStart')
+    display_length = request.POST.get('iDisplayLength')
+    end = start + display_length
+    search = request.POST.get('sSearch')
+    sort = request.POST.get('iSortCol_0')
+    ORDER_BY_FIELDS = {
+        0: 'name',
+    }
+
+    if search:
+        products = Product.objects.exclude(active=False).filter(
+            Q(name__icontains=search)|Q(last_names__icontains=search)
+        )
+    else:
+        products = Product.objects.filter(active=True)
+
+    if sort:
+        direction = '-' if request.POST.get('sSortDir_0') == 'desc' else '' # asc or desc?
+        index_of_field = int(sort) # order by which field?
+        order_statment = direction + ORDER_BY_FIELDS.get(index_of_field)
+        products = products.order_by(order_statment)
+
+    count = products.count()
+    for product in products[start:end]:
+        aaData.append([
+            product.name,
+            product.price,
+            '<input type="checkbox" data-id="%s">' % product.pk,
+        ])
+    data = {
+        "iTotalRecords": count,
+        "iDisplayStart": start,
+        "iDisplayLength": display_length,
+        "iTotalDisplayRecords": count,
+        "aaData":aaData
+    }
+    return HttpResponse(json.dumps(data))
 
 def contact(request):
     '''

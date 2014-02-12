@@ -27,7 +27,9 @@
 
 
   <!-- CSS : implied media="all" -->
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+
 
 </head>
 
@@ -85,8 +87,15 @@
   <script>!window.jQuery && document.write(unescape('%3Cscript src="{{ STATIC_URL }}js/libs/jquery-1.4.2.min.js"%3E%3C/script%3E'))</script>
   
   <!-- scripts concatenated and minified via ant build script-->
+  <script src="{{ STATIC_URL }}js/libs/ajax.csrf.js"></script>
+  <script src="{{ STATIC_URL }}js/libs/jquery.dataTables.min.js"></script>
+  <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
+  <script src="{{ STATIC_URL }}js/libs/dataTable.bootstrap-plugin.js"></script>
   <script src="{{ STATIC_URL }}js/plugins.js"></script>
   <script src="{{ STATIC_URL }}js/script.js"></script>
+  <script>
+  var STATIC_URL = '{{ STATIC_URL }}';
+  </script>
   <!-- end concatenated and minified scripts-->  
   <!--[if lt IE 7 ]>
     <script src="js/libs/dd_belatedpng.js"></script>
