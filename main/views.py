@@ -204,3 +204,8 @@ def order(request):
     '''
     return render(request, "order.html")
 
+def mobile(request):
+    '''
+    Shows index page
+    '''
+    return render(request, "mobile.html")

@@ -1258,7 +1258,7 @@ text-decoration:none;
 /* ---------------------------------------------------------------Forms--------------------------------------------------------------- */
 .inner_main input{
 width:95%;
-height:13px;
+height:30px;
 padding:8px 10px 6px;
 margin:1px 0 10px;
 background-color:#f1f1f2;
@@ -2386,4 +2386,7 @@ vertical-align: middle;
 
 .menu2 .menu_box_left_bg {
     background: none !important;
+}
+#products-datatable_length {
+    display: none;
 }

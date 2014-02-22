@@ -1,0 +1,29 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>Monin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.mobile-1.4.1.min.css" />
+    <script src="{{ STATIC_URL }}js/libs/jquery-1.11.0.min.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/jquery.mobile-1.4.1.min.js"></script>
+    <style>
+        #logo-mobile img {
+            width: 50%;
+            height: 50%;
+            left: 25%;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div data-role="page">
+        <div data-role="header" id="logo-mobile">
+            <img src="{{ STATIC_URL }}images/logo.png" alt="" />
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            {% block main-content %}{% endblock main-content %}
+        </div><!-- /content -->
+    </div><!-- /page -->
+</body>
+</html>
