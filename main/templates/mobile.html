@@ -1,8 +1,19 @@
 {% extends 'base_mobile.html' %}
 {% block main-content %}
-<label for="text-basic">Usuario</label>
-<input type="text" name="text-basic" id="text-basic" value="">
-<label for="password">Password:</label>
-<input type="password" name="password" id="password" value="" autocomplete="off">
-<button class="ui-btn ui-btn-b">Entrar</button>
+<form method="post" action="{% url 'mobile' %}">
+    {% csrf_token %}
+    {% for field in form %}
+    <label for="text-basic">{{ field.label }}</label>
+    {{ field }}
+    {% if field.errors %}
+    {% for error in field.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+    {% for error in form_errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <button type="submit" class="ui-btn ui-btn-b">Entrar</button>
+</form>
 {% endblock main-content %}

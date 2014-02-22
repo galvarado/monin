@@ -129,13 +129,17 @@ def clients(request):
     '''
 
     form = AuthForm()
+    form_errors = None
     if request.method == 'POST':
         form = AuthForm(None, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
             return redirect('order')
+        else:
+          form_errors = form.errors.get('__all__')
     return render(request, "clients.html", {
         'form': form,
+        'form_errors': form_errors,
     })
 
 def products(request):
@@ -206,6 +210,18 @@ def order(request):
 
 def mobile(request):
     '''
-    Shows index page
+    Shows index mobile page
     '''
-    return render(request, "mobile.html")
+    form = AuthForm()
+    form_errors = None
+    if request.method == 'POST':
+        form = AuthForm(None, request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect('mobile_order')
+        else:
+          form_errors = form.errors.get('__all__')
+    return render(request, "mobile.html", {
+        'form': form,
+        'form_errors': form_errors,
+    })

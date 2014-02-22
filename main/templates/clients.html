@@ -17,6 +17,9 @@
                     {% endfor %}
                     {% endif %}
                     {% endfor %}
+                    {% for error in form_errors %}
+                    <p class="error">{{ error }}</p>
+                    {% endfor %}
                     <p><input type="submit" id="submit" value="Enviar" class="superbutton"></p>
                     <ul id="form_response"><li></li></ul>
                 </div>
