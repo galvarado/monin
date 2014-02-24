@@ -16,6 +16,7 @@ urlpatterns = patterns('main.views',
     url(r'^contact/?$', 'contact', name='contact'),
     url(r'^mobile/?$', 'mobile', name='mobile'),
     url(r'^mobile_order/?$', 'mobile_order', name='mobile_order'),
+    url(r'^admin/?$', 'admin', name='admin'),
     url(r'^i18n/', include('django.conf.urls.i18n')),
 )
 

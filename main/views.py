@@ -38,9 +38,17 @@ def is_admin(user):
 
 def is_client(user):
     """
-    Function to determinate if the user belongs to the sales group
+    Function to determinate if the user belongs to the clients group
     """
     if get_user_rol(user) == 'client':
+        return True
+    return False
+
+def is_distributor(user):
+    """
+    Function to determinate if the user belongs to the distibutor group
+    """
+    if get_user_rol(user) == 'distributor':
         return True
     return False
 
@@ -208,6 +216,8 @@ def order(request):
     '''
     return render(request, "order.html")
 
+# Mobile views
+
 def mobile(request):
     '''
     Shows index mobile page
@@ -227,8 +237,11 @@ def mobile(request):
     })
 
 @login_required
+@user_passes_test(lambda u: is_distributor(u))
 def mobile_order(request):
     '''
     Shows order page
     '''
     return render(request, "mobile_order.html")
+
+# Admin views
