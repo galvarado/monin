@@ -225,3 +225,10 @@ def mobile(request):
         'form': form,
         'form_errors': form_errors,
     })
+
+@login_required
+def mobile_order(request):
+    '''
+    Shows order page
+    '''
+    return render(request, "mobile_order.html")
