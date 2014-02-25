@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard - Monin</title>
+    {% block css %}
+    <!-- Bootstrap core CSS -->
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add custom CSS here -->
+    <link href="{{ STATIC_URL }}css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/tables.css">
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+    {% endblock %}
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Traffic Admin</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav side-nav">
+            {% block left-side-menu %}
+				{% url 'admin_users' as url %}
+				<li {% if url == request.path %}class="active"{% endif %}>
+				  <a href="{{ url }}"><i class="fa fa-dashboard"></i>Usuarios</a>
+				</li>
+				{% url 'properties' as url %}
+				<li {% if url == request.path %}class="active"{% endif %}>
+				  <a href="{{ url }}"><i class="fa fa-bar-chart-o"></i>Propiedades</a>
+				</li>
+				{% endblock left-side-menu %}
+          </ul>
+          {% block top-menu %}
+          <ul class="nav navbar-nav navbar-right navbar-user">
+            <li class="dropdown user-dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Hola, {{ user.username }} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#"><i class="fa fa-user"></i> Perfil</a></li>
+                <li><a href="#"><i class="fa fa-gear"></i> Configuración</a></li>
+                <li class="divider"></li>
+                <li><a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Cerrar sesión</a></li>
+              </ul>
+            </li>
+          </ul>
+          {% endblock top-menu %}
+        </div><!-- /.navbar-collapse -->
+      </nav>
+      <div id="page-wrapper">
+      {% block main-content %}
+      {% endblock main-content %}
+      </div><!-- /#page-wrapper -->
+    </div><!-- /#wrapper -->
+    {% block js %}
+    <!-- JavaScript -->
+    <script>
+    var STATIC_URL = "{{ STATIC_URL }}";
+    </script>
+    <script src="{{ STATIC_URL }}js/jquery-1.11.0.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
+
+    <!-- Page Specific Plugins -->
+
+    <script src="{{ STATIC_URL }}js/libs/jquery.dataTables.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/ajax.csrf.js"></script>
+    <script src="{{ STATIC_URL }}js/global.js"></script>
+    {% endblock js %}
+  </body>
+</html>

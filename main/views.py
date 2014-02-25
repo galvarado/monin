@@ -245,3 +245,21 @@ def mobile_order(request):
     return render(request, "mobile_order.html")
 
 # Admin views
+
+def admin(request):
+    '''
+    Shows index mobile page
+    '''
+    form = AuthForm()
+    form_errors = None
+    if request.method == 'POST':
+        form = AuthForm(None, request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect('mobile_order')
+        else:
+          form_errors = form.errors.get('__all__')
+    return render(request, "admin.html", {
+        'form': form,
+        'form_errors': form_errors,
+    })
