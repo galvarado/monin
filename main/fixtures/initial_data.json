@@ -189,6 +189,60 @@
  }
 },
 {
+ "pk": 22, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "add_migrationhistory", 
+  "name": "Can add migration history", 
+  "content_type": 8
+ }
+},
+{
+ "pk": 23, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "change_migrationhistory", 
+  "name": "Can change migration history", 
+  "content_type": 8
+ }
+},
+{
+ "pk": 24, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "delete_migrationhistory", 
+  "name": "Can delete migration history", 
+  "content_type": 8
+ }
+},
+{
+ "pk": 25, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "add_registrationprofile", 
+  "name": "Can add registration profile", 
+  "content_type": 9
+ }
+},
+{
+ "pk": 26, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "change_registrationprofile", 
+  "name": "Can change registration profile", 
+  "content_type": 9
+ }
+},
+{
+ "pk": 27, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "delete_registrationprofile", 
+  "name": "Can delete registration profile", 
+  "content_type": 9
+ }
+},
+{
  "pk": 1, 
  "model": "auth.group", 
  "fields": {
@@ -205,6 +259,14 @@
  }
 },
 {
+ "pk": 3, 
+ "model": "auth.group", 
+ "fields": {
+  "name": "distributor", 
+  "permissions": []
+ }
+},
+{
  "pk": 1, 
  "model": "auth.user", 
  "fields": {
@@ -214,7 +276,7 @@
   "is_active": true, 
   "is_superuser": true, 
   "is_staff": true, 
-  "last_login": "2014-01-27T18:41:44Z", 
+  "last_login": "2014-02-25T03:35:18Z", 
   "groups": [], 
   "user_permissions": [], 
   "password": "pbkdf2_sha256$12000$9kQ8nHbp7aad$Q70Af+VmvuH98M406yRIhH/We2BPhtUsT4qK+TVnSG0=", 
@@ -232,7 +294,7 @@
   "is_active": true, 
   "is_superuser": false, 
   "is_staff": false, 
-  "last_login": "2014-02-12T07:14:45Z", 
+  "last_login": "2014-02-25T03:37:44Z", 
   "groups": [
    2
   ], 
@@ -260,6 +322,53 @@
   "password": "pbkdf2_sha256$12000$v2ZpK6ypiJ7X$oeiW2H7XF/8i5XQiysxJGUlptK63pkoqh4p717mmBOM=", 
   "email": "", 
   "date_joined": "2014-02-12T06:40:51Z"
+ }
+},
+{
+ "pk": 4, 
+ "model": "auth.user", 
+ "fields": {
+  "username": "distributor", 
+  "first_name": "", 
+  "last_name": "", 
+  "is_active": true, 
+  "is_superuser": false, 
+  "is_staff": false, 
+  "last_login": "2014-02-25T03:47:45Z", 
+  "groups": [
+   3
+  ], 
+  "user_permissions": [], 
+  "password": "pbkdf2_sha256$12000$FH9snE3de31E$BpMip2JHqM4CDfdHr9Ejkljt7klppPXGhIme7WO7nEo=", 
+  "email": "", 
+  "date_joined": "2014-02-25T03:36:05Z"
+ }
+},
+{
+ "pk": 1, 
+ "model": "main.product", 
+ "fields": {
+  "active": true, 
+  "price": 100.0, 
+  "name": "Modelo1"
+ }
+},
+{
+ "pk": 2, 
+ "model": "main.product", 
+ "fields": {
+  "active": true, 
+  "price": 200.0, 
+  "name": "Modelo2"
+ }
+},
+{
+ "pk": 1, 
+ "model": "south.migrationhistory", 
+ "fields": {
+  "applied": "2014-02-12T07:53:05Z", 
+  "app_name": "main", 
+  "migration": "0001_initial"
  }
 }
 ]
