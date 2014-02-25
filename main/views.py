@@ -190,6 +190,17 @@ def order_product(request, pk):
     })
 
 @login_required
+@user_passes_test(lambda u: is_client(u))
+def order_delete(request,):
+    '''
+    Delete  order product
+    '''
+    orders = request.user.orders.all()
+    for order in orders:
+        order.delete()
+    return HttpResponse(json.dumps({'response': 1}))
+
+@login_required
 def products_all(request):
     '''
     Retrive all products to fill the products table
@@ -255,7 +266,6 @@ def orders_all(request):
             order.color,
             order.size,
             order.quantity,
-            '<input type="submit" class="superbutton delete-order" value="Eliminar" data-id="%s">' % order.pk,
         ])
 
     data = {
