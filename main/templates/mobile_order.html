@@ -1,36 +1,36 @@
 {% extends 'base_mobile.html' %}
 {% block main-content %}
 <div data-role="fieldcontain">
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    {% include 'mobile_order_fields.html' %}
-    <button type="submit" id='add-other' class="ui-btn ui-btn-b">Añadir otro</button>
-    <button type="submit" id='finish-order' class="ui-btn ui-btn-b">Finalizar</button>
+    <form method="post" action="{% url 'mobile_order' %}" data-ajax="false">{% csrf_token %}
+        {% include 'mobile_order_fields.html' %}
+        {% include 'mobile_order_fields2.html' %}
+        {% include 'mobile_order_fields3.html' %}
+        {% include 'mobile_order_fields4.html' %}
+        {% include 'mobile_order_fields5.html' %}
+        {% include 'mobile_order_fields6.html' %}
+        {% include 'mobile_order_fields7.html' %}
+        {% include 'mobile_order_fields8.html' %}
+        {% include 'mobile_order_fields9.html' %}
+        {% include 'mobile_order_fields10.html' %}
+        {% include 'mobile_order_fields11.html' %}
+        {% include 'mobile_order_fields12.html' %}
+        {% include 'mobile_order_fields13.html' %}
+        {% include 'mobile_order_fields14.html' %}
+        {% include 'mobile_order_fields15.html' %}
+        <button type="button" id='add-other' class="ui-btn ui-btn-b">Añadir otro</button>
+        <button type="submit" id='finish-order' class="ui-btn ui-btn-b">Finalizar</button>
+    </form>
 </div>
 <script>
 $(document).ready(function () {
+    $('.hide:first').find('input[type="hidden"]').val(1);
     $('.hide:first').removeClass('hide').show();
     $('#add-other').click(function(){
+        $('.hide:first').find('input[type="hidden"]').val(1);
         $('.hide:first').removeClass('hide').show();
+    });
+    $('#finish-order').click(function(){
+        alert('El pedido esta siedo enviado! Puedes generar más');
     });
 });
 

@@ -242,6 +242,14 @@ def mobile_order(request):
     '''
     Shows order page
     '''
+    if request.method == 'POST':
+        message = 'Pedido realizado desde  www.monin.com.mx:\n\n'
+        for i in range(15):
+            i += 1 
+            if request.POST.get('active-%s' % i) == '1':
+                message += 'Modelo:%s Talla:%s  Color:%s Cantidad:%s Precio:%s \n' % (request.POST.get('model-%s' %i), request.POST.get('size-%s' %i), request.POST.get('color-%s' %i), request.POST.get('quantity-%s' %i), request.POST.get('price-%s' %i))
+
+        send_mail(settings.SUBJECT, message, settings.FROM, [settings.TO], fail_silently=False)
     return render(request, "mobile_order.html", {
         'loop': [i+1 for i in range(16)]
     })
