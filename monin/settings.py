@@ -99,7 +99,31 @@ USE_L10N = False
 
 USE_TZ = True
 
+COLORS = (
+  ('black', _('Negro')),
+  ('white', _('Blanco')),
+  ('beige', _('Biege')),
+  ('blue', _('Marino')),
+)
 
+SIZES = (
+  ('1', 1),
+  ('2', 2),
+  ('3', 3),
+  ('4', 4),
+  ('5', 5),
+  ('6', 6),
+  ('7', 7),
+  ('8', 8),
+  ('9', 9),
+  ('10', 10),
+  ('11', 11),
+  ('12', 12),
+  ('13', 13),
+  ('14', 14),
+  ('15', 15),
+  ('16', 16),
+)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 

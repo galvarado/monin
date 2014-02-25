@@ -2390,3 +2390,10 @@ vertical-align: middle;
 #products-datatable_length {
     display: none;
 }
+
+#orders-datatable_length, #orders-datatable_filter {
+    display: none;
+}
+#id_quantity {
+    width: 10% !important;
+}

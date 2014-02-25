@@ -350,7 +350,7 @@
  "fields": {
   "active": true, 
   "price": 100.0, 
-  "name": "Modelo1"
+  "model": "Modelo1"
  }
 },
 {
@@ -359,7 +359,7 @@
  "fields": {
   "active": true, 
   "price": 200.0, 
-  "name": "Modelo2"
+  "model": "Modelo2"
  }
 },
 {

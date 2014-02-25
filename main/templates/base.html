@@ -82,10 +82,8 @@
 
   {% block js %}
   <!-- Javascript at the bottom for fast page loading -->
-  <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="{{ STATIC_URL }}js/libs/jquery-1.4.2.min.js"%3E%3C/script%3E'))</script>
-  
+    <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <!-- scripts concatenated and minified via ant build script-->
   <script src="{{ STATIC_URL }}js/libs/ajax.csrf.js"></script>
   <script src="{{ STATIC_URL }}js/libs/jquery.dataTables.min.js"></script>

@@ -7,7 +7,7 @@ from django.contrib.auth import logout as auth_logout, login as auth_login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse , Http404
 
-from main.forms import AccessForm, AuthForm
+from main.forms import AccessForm, AuthForm, OrderForm
 from main.models import Product
 
 # Auth views
@@ -159,6 +159,37 @@ def products(request):
     return render(request, "products.html")
 
 @login_required
+@user_passes_test(lambda u: is_client(u))
+def order(request):
+    '''
+    Shows order page
+    '''
+    return render(request, "order.html")
+
+@login_required
+@user_passes_test(lambda u: is_client(u))
+def order_product(request, pk):
+    '''
+    Shows order product page
+    '''
+    product = Product.objects.get(pk=pk)
+    form = OrderForm(initial={'product': product})
+    form_errors = None
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.product = product
+            order.client = request.user
+            order.save()
+            return redirect('order')
+    return render(request, "product_order.html", {
+        'form': form,
+        'form_errors': form_errors,
+        'pk': pk,
+    })
+
+@login_required
 def products_all(request):
     '''
     Retrive all products to fill the products table
@@ -170,12 +201,12 @@ def products_all(request):
     search = request.POST.get('sSearch')
     sort = request.POST.get('iSortCol_0')
     ORDER_BY_FIELDS = {
-        0: 'name',
+        0: 'model',
     }
 
     if search:
         products = Product.objects.exclude(active=False).filter(
-            Q(name__icontains=search)|Q(last_names__icontains=search)
+            Q(model__icontains=search)
         )
     else:
         products = Product.objects.filter(active=True)
@@ -189,10 +220,44 @@ def products_all(request):
     count = products.count()
     for product in products[start:end]:
         aaData.append([
-            product.name,
+            product.model,
             product.price,
-            '<input type="checkbox" data-id="%s">' % product.pk,
+            '<a href="order/product/%s"><input type="submit" class="superbutton do-order" value="Agregar a pedido"></a>' % product.pk,
         ])
+    data = {
+        "iTotalRecords": count,
+        "iDisplayStart": start,
+        "iDisplayLength": display_length,
+        "iTotalDisplayRecords": count,
+        "aaData":aaData
+    }
+    return HttpResponse(json.dumps(data))
+
+
+@login_required
+def orders_all(request):
+    '''
+    Retrive all orders to fill the orders table
+    '''
+    aaData = []
+    start = request.POST.get('iDisplayStart')
+    display_length = request.POST.get('iDisplayLength')
+    end = start + display_length
+    search = request.POST.get('sSearch')
+    sort = request.POST.get('iSortCol_0')
+    orders = request.user.orders.all()
+
+    count = orders.count()
+    for order in orders[start:end]:
+        aaData.append([
+            order.product.model,
+            order.product.price,
+            order.color,
+            order.size,
+            order.quantity,
+            '<input type="submit" class="superbutton delete-order" value="Eliminar" data-id="%s">' % order.pk,
+        ])
+
     data = {
         "iTotalRecords": count,
         "iDisplayStart": start,
@@ -208,13 +273,6 @@ def contact(request):
     '''
     return render(request, "contact.html")
 
-@login_required
-@user_passes_test(lambda u: is_client(u))
-def order(request):
-    '''
-    Shows order page
-    '''
-    return render(request, "order.html")
 
 # Mobile views
 
