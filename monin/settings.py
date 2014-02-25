@@ -150,7 +150,7 @@ STATICFILES_DIRS = (
 )
 
 FROM = 'info@monin.com.mx'
-TO = 'guillermoalvarado89@gmail.com'
+TO = 'omr_123@hotmail.com' #'guillermoalvarado89@gmail.com'
 SUBJECT = '[Monin] Aviso de la página'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
