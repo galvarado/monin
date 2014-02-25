@@ -242,10 +242,13 @@ def mobile_order(request):
     '''
     Shows order page
     '''
-    return render(request, "mobile_order.html")
+    return render(request, "mobile_order.html", {
+        'loop': [i+1 for i in range(16)]
+    })
 
 # Admin views
-
+@login_required
+@user_passes_test(lambda u: is_admin(u))
 def admin(request):
     '''
     Shows index mobile page

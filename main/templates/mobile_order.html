@@ -1,4 +1,38 @@
 {% extends 'base_mobile.html' %}
 {% block main-content %}
-HOLA
+<div data-role="fieldcontain">
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    {% include 'mobile_order_fields.html' %}
+    <button type="submit" id='add-other' class="ui-btn ui-btn-b">Añadir otro</button>
+    <button type="submit" id='finish-order' class="ui-btn ui-btn-b">Finalizar</button>
+</div>
+<script>
+$(document).ready(function () {
+    $('.hide:first').removeClass('hide').show();
+    $('#add-other').click(function(){
+        $('.hide:first').removeClass('hide').show();
+    });
+});
+
+</script>
 {% endblock main-content %}

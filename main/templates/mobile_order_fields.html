@@ -1,0 +1,37 @@
+<div class='hide'>
+    <fieldset class="ui-grid-a">
+        <div class="ui-block-a">
+            <label for="textinput-1">Modelo</label>
+            <input type="text" name="textinput-1" id="textinput-1" placeholder="Text input" value="">
+        </div>
+        <div class="ui-block-b">
+            <label for="select-native-1">Color</label>
+            <select name="select-native-1" id="select-native-1">
+                <option value="Blanco">Blanco</option>
+                <option value="Beige">Beige</option>
+                <option value="Negro">Negro</option>
+                <option value="Marino">Marino</option>
+            </select>
+        </div>
+    </fieldset>
+    <fieldset class="ui-grid-a">
+        <div class="ui-block-a">
+            <label for="textinput-1">Cantidad</label>
+            <input type="text" name="textinput-1" id="textinput-1" placeholder="Text input" value="">
+        </div>
+        <div class="ui-block-b">
+            <label for="select-native-1">Talla</label>
+            <select name="select-native-1" id="select-native-1">
+                {% for i in loop  %}
+                <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </fieldset>
+    <fieldset class="ui-grid-a">
+        <div class="ui-block-a">
+            <label for="textinput-1">Precio</label>
+            <input type="text" name="textinput-1" id="textinput-1" placeholder="Text input" value="">
+        </div>
+    </fieldset>
+</div>

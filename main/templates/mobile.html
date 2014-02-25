@@ -2,7 +2,7 @@
 {% block main-content %}
 <form method="post" action="{% url 'mobile' %}" data-ajax="false">{% csrf_token %}
     {% for field in form %}
-    <label for="text-basic">{{ field.label }}</label>
+    <label for="text-basic">{% if not field.name == 'username'  %} {{ field.label }} {% else %} Usuario {%endif%}</label>
     {{ field }}
     {% if field.errors %}
     {% for error in field.errors %}
