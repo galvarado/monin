@@ -4,6 +4,7 @@ from django.conf import settings
 import re
 
 urlpatterns = patterns('main.views',
+    # App Urls
     url(r'^$', 'index', name='index'),
     url(r'^logout/?$', 'logout', name='logout'),
     url(r'^home/?$', 'home', name='home'),
@@ -13,13 +14,18 @@ urlpatterns = patterns('main.views',
     url(r'^products/all/?$', 'products_all', name='products_all'),
     url(r'^orders/all/?$', 'orders_all', name='orders_all'),
     url(r'^order/delete/?$', 'order_delete', name='order_delete'),
+    url(r'^order/do/?$', 'order_do', name='order_do'),
     url(r'^clients/?$', 'clients', name='clients'),
     url(r'^order/?$', 'order', name='order'),
     url(r'^order/product/(?P<pk>\d+)/?$', 'order_product', name='order_product'),
     url(r'^contact/?$', 'contact', name='contact'),
+    # Mobile Urls
     url(r'^mobile/?$', 'mobile', name='mobile'),
     url(r'^mobile_order/?$', 'mobile_order', name='mobile_order'),
-    url(r'^admin/?$', 'admin', name='admin'),
+    # Admin Urls
+    url(r'^admin/?$', 'admin_login', name='admin_login'),
+    url(r'^admin/panel/?$', 'admin', name='admin'),
+    # Translations Urls
     url(r'^i18n/', include('django.conf.urls.i18n')),
 )
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--[if IE 8]>               <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+  <head>    
+
+    <link rel="shortcut icon" href="favicon.png"> 
+    
+    <title>Monin admin</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/login.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ STATIC_URL }}css/animate-custom.css" rel="stylesheet">
+   
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{{ STATIC_URL }}js/html5shiv.js"></script>
+      <script src="{{ STATIC_URL }}js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+    <body>
+        <!-- start Login box -->
+        <div class="container" id="login-block">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+                    <img src='{{ STATIC_URL }}images/logo.png'>
+                   <div class="login-box clearfix animated flipInY">
+                        <div class="login-logo">
+                        </div> 
+                        <hr />
+                        <div class="login-form">
+                            <div class="alert alert-error hide">
+                                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                  <h4>Error!</h4>
+                                   Your Error Message goes here
+                            </div>
+                            <form action="{% url 'admin_login' %}" method="post">
+                                  {% csrf_token %}
+                                  {% for field in form %} 
+                                   <label>{% if not field.name == 'username'  %} {{ field.label }} {% else %} Usuario {%endif%}</label>
+                                  {{ field }}
+                                  {% if field.errors %}
+                                    <div class="alert-error">
+                                    {% for error in field.errors %}
+                                    <p>{{ error }}</p>
+                                    {% endfor %}
+                                    </div>
+                                  {% endif %}
+                                  {% endfor %}
+                                  {% if form_errors %}
+                                  <div class="alert-error">
+                                     {% for error in form_errors %}
+                                      <p>{{ error }}</p>
+                                      {% endfor %}
+                                  </div>
+                                  {% endif %}
+                                 <button type="submit" class="btn btn-red btn-primary">Entrar</button> 
+                            </form> 
+                            <div class="login-links"> 
+
+                                <br />
+                            </div>              
+                        </div>                      
+                   </div>
+                    
+                </div>
+            </div>
+        </div>
+     
+        <!-- End Login box -->
+        <footer class="container">
+            <p id="footer-text"><small>Copyright &copy; 2014 Monin</small></p>
+        </footer>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
+    </body>
+</html>

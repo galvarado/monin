@@ -100,10 +100,10 @@ USE_L10N = False
 USE_TZ = True
 
 COLORS = (
-  ('black', _('Negro')),
-  ('white', _('Blanco')),
+  ('negro', _('Negro')),
+  ('blanco', _('Blanco')),
   ('beige', _('Biege')),
-  ('blue', _('Marino')),
+  ('marino', _('Marino')),
 )
 
 SIZES = (

@@ -29,7 +29,7 @@
         </tbody>
     </table>
     <h1>¿Que deseas hacer?</h2>
-    <input type="submit" class="superbutton"value="Quiero enviar este pedido">
+    <input id="do-order" type="submit" class="superbutton"value="Quiero enviar este pedido">
     <input id="delete-order" type="submit" class="superbutton"value="Quiero borrar este pedido">
 </div>
 {% endblock main-content %}
@@ -38,7 +38,6 @@
 <script>
 $(function(){
     $('#delete-order').click(function() {
-        pk = 1
         $.ajax({
             url: "/order/delete",
             type: 'post',
@@ -49,6 +48,22 @@ $(function(){
             success: function(data) {
                 if (data.response == 1) {
                   datatable2.fnDraw();
+                }
+            }
+        });
+    });
+    $('#do-order').click(function() {
+        $.ajax({
+            url: "/order/do",
+            type: 'post',
+            dataType: 'json',
+            data: {
+            pk: 1,
+            },
+            success: function(data) {
+                if (data.response == 1) {
+                  datatable2.fnDraw();
+                  alert('Tu pedido ha sido enviado!');
                 }
             }
         });

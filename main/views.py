@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.contrib.auth import logout as auth_logout, login as auth_login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse , Http404
+from django.core.urlresolvers import reverse
 
 from main.forms import AccessForm, AuthForm, OrderForm
 from main.models import Product
@@ -135,7 +136,7 @@ def clients(request):
     '''
     Manage the login of the clients
     '''
-
+    auth_logout(request)
     form = AuthForm()
     form_errors = None
     if request.method == 'POST':
@@ -196,6 +197,22 @@ def order_delete(request,):
     Delete  order product
     '''
     orders = request.user.orders.all()
+    for order in orders:
+        order.delete()
+    return HttpResponse(json.dumps({'response': 1}))
+
+@login_required
+@user_passes_test(lambda u: is_client(u))
+def order_do(request,):
+    '''
+    Do a order product
+    '''
+    orders = request.user.orders.all()
+    message = 'Pedido realizado por el cliente con num %s desde  www.monin.com.mx:\n\n' % request.user.username
+    for order in orders:
+        message += 'Modelo:%s Talla:%s  Color:%s Cantidad:%s Precio:%s \n' % (order.product.model, order.size, order.color, order.quantity, order.product.price)
+
+    send_mail(settings.SUBJECT, message, settings.FROM, [settings.TO], fail_silently=False)
     for order in orders:
         order.delete()
     return HttpResponse(json.dumps({'response': 1}))
@@ -290,6 +307,7 @@ def mobile(request):
     '''
     Shows index mobile page
     '''
+    auth_logout(request)
     form = AuthForm()
     form_errors = None
     if request.method == 'POST':
@@ -324,22 +342,30 @@ def mobile_order(request):
     })
 
 # Admin views
-@login_required
-@user_passes_test(lambda u: is_admin(u))
-def admin(request):
+def admin_login(request):
     '''
     Shows index mobile page
     '''
+    auth_logout(request)
     form = AuthForm()
     form_errors = None
     if request.method == 'POST':
         form = AuthForm(None, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect('mobile_order')
+            return redirect('admin')
         else:
           form_errors = form.errors.get('__all__')
-    return render(request, "admin.html", {
+    return render(request, "admin_login.html", {
         'form': form,
         'form_errors': form_errors,
     })
+
+# Admin views
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin(request):
+    '''
+    Shows index mobile page
+    '''
+    return render(request, "admin.html")
