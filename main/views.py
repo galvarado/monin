@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import json
 
 from django.conf import settings
@@ -7,9 +9,12 @@ from django.contrib.auth import logout as auth_logout, login as auth_login
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect, HttpResponse , Http404
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
+from django.db.models import Q
 
 from main.forms import AccessForm, AuthForm, OrderForm
 from main.models import Product
+
 
 # Auth views
 
@@ -251,6 +256,46 @@ def products_all(request):
             product.model,
             product.price,
             '<a href="order/product/%s"><input type="submit" class="superbutton do-order" value="Agregar a pedido"></a>' % product.pk,
+        ])
+    data = {
+        "iTotalRecords": count,
+        "iDisplayStart": start,
+        "iDisplayLength": display_length,
+        "iTotalDisplayRecords": count,
+        "aaData":aaData
+    }
+    return HttpResponse(json.dumps(data))
+
+@login_required
+def clients_all(request):
+    '''
+    Retrive all clients to fill the products table
+    '''
+    aaData = []
+    start = request.POST.get('iDisplayStart')
+    display_length = request.POST.get('iDisplayLength')
+    end = start + display_length
+    search = request.POST.get('sSearch')
+    sort = request.POST.get('iSortCol_0')
+    ORDER_BY_FIELDS = {
+        0: 'model',
+    }
+
+    if search:
+        clients = User.objects.filter(groups__name='client').filter(
+            Q(username=search)
+        )
+    else:
+        clients = User.objects.filter(groups__name='client')
+
+    count = clients.count()
+    for client in clients[start:end]:
+        aaData.append([
+            client.username,
+            client.date_joined.strftime('%d-%m-%Y'),
+            client.last_login.strftime('%d-%m-%Y'),
+            'Activo' if client.is_active else 'Inactivo',
+            '<a href=""><button type="button" class="btn btn-xs btn-info">Cambiar contraseña</button></a>&nbsp;<a href=""><button type="button" class="btn btn-xs btn-warning">Desactivar</button></a>&nbsp;<a href=""><button type="button" class="btn btn-xs btn-danger">Eliminar</button></a>',
         ])
     data = {
         "iTotalRecords": count,

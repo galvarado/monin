@@ -165,3 +165,15 @@ table.tablesorter thead tr th:hover {
 .can-be-deactivated {
   display: none;
 }
+
+.dataTables_length {
+  display: none !important
+}
+
+.dataTables_paginate {
+  border: none !important;
+}
+
+.dataTables_paginate ul{
+  list-style-type: none;
+}

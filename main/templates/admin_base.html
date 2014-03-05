@@ -63,12 +63,11 @@
     <script>
     var STATIC_URL = "{{ STATIC_URL }}";
     </script>
-    <script src="{{ STATIC_URL }}js/jquery-1.11.0.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
-
+    <script src="{{ STATIC_URL }}js/libs/jquery-1.11.0.min.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
     <!-- Page Specific Plugins -->
-
-    <script src="{{ STATIC_URL }}js/libs/jquery.dataTables.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/jquery.dataTables.min.js"></script>
+    <script src="{{ STATIC_URL }}js/libs/dataTable.bootstrap-plugin.js"></script>
     <script src="{{ STATIC_URL }}js/libs/ajax.csrf.js"></script>
     <script src="{{ STATIC_URL }}js/global.js"></script>
     {% endblock js %}
