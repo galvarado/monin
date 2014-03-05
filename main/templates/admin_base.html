@@ -34,20 +34,32 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
             {% block left-side-menu %}
-				{% url 'admin_users' as url %}
-				<li {% if url == request.path %}class="active"{% endif %}>
-				  <a href="{{ url }}"><i class="fa fa-dashboard"></i>Usuarios</a>
-				</li>
-				{% url 'properties' as url %}
-				<li {% if url == request.path %}class="active"{% endif %}>
-				  <a href="{{ url }}"><i class="fa fa-bar-chart-o"></i>Propiedades</a>
-				</li>
-				{% endblock left-side-menu %}
+              {% url 'admin' as url %}
+              <li {% if url == request.path %}class="active"{% endif %}>
+                <a href="{{ url }}"><i class="fa fa-dashboard"></i>Clientes</a>
+              </li>
+              {% url 'admin_users' as url %}
+              <li {% if url == request.path %}class="active"{% endif %}>
+                <a href="{{ url }}"><i class="fa fa-dashboard"></i>Productos</a>
+              </li>
+              {% url 'admin_users' as url %}
+              <li {% if url == request.path %}class="active"{% endif %}>
+                <a href="{{ url }}"><i class="fa fa-dashboard"></i>Categorias muestra</a>
+              </li>
+              {% url 'properties' as url %}
+              <li {% if url == request.path %}class="active"{% endif %}>
+                <a href="{{ url }}"><i class="fa fa-bar-chart-o"></i>Productos muestra</a>
+              </li>
+              {% url 'admin_users' as url %}
+              <li {% if url == request.path %}class="active"{% endif %}>
+                <a href="{{ url }}"><i class="fa fa-dashboard"></i>Configuración</a>
+              </li>
+              {% endblock left-side-menu %}
           </ul>
           {% block top-menu %}
           <ul class="nav navbar-nav navbar-right navbar-user">
             <li class="dropdown user-dropdown">
-              <a href="{% url 'logout' %}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user">Salir</a>
+              <a href="{% url 'logout' %}"><i class="fa fa-user">Salir</a>
             </li>
           </ul>
           {% endblock top-menu %}

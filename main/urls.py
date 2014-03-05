@@ -25,7 +25,7 @@ urlpatterns = patterns('main.views',
     url(r'^mobile_order/?$', 'mobile_order', name='mobile_order'),
     # Admin Urls
     url(r'^admin/?$', 'admin_login', name='admin_login'),
-    url(r'^admin/panel/?$', 'admin', name='admin'),
+    url(r'^admin/clients/?$', 'admin', name='admin'),
     # Translations Urls
     url(r'^i18n/', include('django.conf.urls.i18n')),
 )
