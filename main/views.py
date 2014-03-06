@@ -286,7 +286,7 @@ def clients_all(request):
 
     if search:
         clients = User.objects.filter(groups__name='client').filter(
-            Q(username=search)
+            Q(username__icontains=search)
         )
     else:
         clients = User.objects.filter(groups__name='client')
@@ -437,7 +437,7 @@ def clients_all(request):
 
     if search:
         clients = User.objects.filter(groups__name='client').filter(
-            Q(username=search)
+            Q(username__icontains=search)
         )
     else:
         clients = User.objects.filter(groups__name='client')
@@ -548,7 +548,7 @@ def admin_categories_sample_all(request):
 
     if search:
         categories = CategorySample.objects.filter(
-            Q(name=search)
+            Q(name__icontains=search)
         )
     else:
         categories = CategorySample.objects.all()
@@ -559,7 +559,7 @@ def admin_categories_sample_all(request):
         aaData.append([
             category.name,
             'Activo' if category.active else 'Inactivo',
-            '<a href="%s"><button type="button" class="btn btn-xs btn-info">Ver foto</button></a>&nbsp;<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/categories/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (category.pk, category.pk, label, category.pk),
+            '<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/category/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (category.pk, label, category.pk),
         ])
     data = {
         "iTotalRecords": count,
@@ -607,7 +607,98 @@ def admin_category_sample_delete(request, pk):
     category = CategorySample.objects.get(pk=pk)
     if request.method == 'POST':
         category.delete()
-        return redirect(reverse('admin'))
+        return redirect(reverse('admin_categories_sample'))
     return render(request, "admin_category_sample_delete.html", {
         'category': category,
+    })
+
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_products_sample(request):
+    '''
+    Shows products sample page
+    '''
+    return render(request, "admin_products_sample.html")
+
+@login_required
+def admin_products_sample_all(request):
+    '''
+    Retrive all products sample to fill the products table
+    '''
+    aaData = []
+    start = request.POST.get('iDisplayStart')
+    display_length = request.POST.get('iDisplayLength')
+    end = start + display_length
+    search = request.POST.get('sSearch')
+    sort = request.POST.get('iSortCol_0')
+    ORDER_BY_FIELDS = {
+        0: 'model',
+    }
+
+    if search:
+        products = ProductSample.objects.filter(
+            Q(name__icontains=search)
+        )
+    else:
+        products = ProductSample.objects.all()
+
+    count = products.count()
+    for product in products[start:end]:
+        label = 'Desactivar' if product.active else 'Activar   '
+        aaData.append([
+            product.name,
+            product.category.name,
+            'Activo' if product.active else 'Inactivo',
+            '<a href="%s"><button type="button" class="btn btn-xs btn-info">Ver foto</button></a>&nbsp;<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/product/sample/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (product.photo.url, product.pk, label, product.pk),
+        ])
+    data = {
+        "iTotalRecords": count,
+        "iDisplayStart": start,
+        "iDisplayLength": display_length,
+        "iTotalDisplayRecords": count,
+        "aaData":aaData
+    }
+    return HttpResponse(json.dumps(data))
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_product_sample_add(request):
+    '''
+    Shows add product sample page
+    '''
+    form = ProductSampleCreationForm()
+    if request.method == 'POST':
+        form = ProductSampleCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save()
+            return redirect(reverse('admin_products_sample'))
+    return render(request, "admin_product_sample_add.html", {
+        'form': form,
+    })
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_product_sample_deactivate(request):
+    '''
+    Shows deactivate product page
+    '''
+    if request.method == 'POST':
+        product = ProductSample.objects.get(pk=request.POST.get('pk'))
+        product.active = not product.active
+        product.save()
+        return HttpResponse(json.dumps({'response': 1}))
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_product_sample_delete(request, pk):
+    '''
+    Shows add client page
+    '''
+    product = ProductSample.objects.get(pk=pk)
+    if request.method == 'POST':
+        product.delete()
+        return redirect(reverse('admin_products_sample'))
+    return render(request, "admin_product_sample_delete.html", {
+        'product': product,
     })

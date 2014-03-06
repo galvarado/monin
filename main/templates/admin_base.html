@@ -46,7 +46,7 @@
               <li {% if url == request.path %}class="active"{% endif %}>
                 <a href="{{ url }}"><i class="fa fa-dashboard"></i>Categorias muestra</a>
               </li>
-              {% url 'properties' as url %}
+              {% url 'admin_products_sample' as url %}
               <li {% if url == request.path %}class="active"{% endif %}>
                 <a href="{{ url }}"><i class="fa fa-bar-chart-o"></i>Productos muestra</a>
               </li>

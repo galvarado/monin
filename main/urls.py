@@ -35,7 +35,11 @@ urlpatterns = patterns('main.views',
     url(r'^admin/category/add/?$', 'admin_category_sample_add', name='admin_category_sample_add'),
     url(r'^admin/category/deactivate/?$', 'admin_category_sample_deactivate', name='admin_category_sample_deactivate'),
     url(r'^admin/category/delete/(?P<pk>\d+)/?$', 'admin_category_sample_delete', name='admin_category_sample_delete'),
-
+    url(r'^admin/products/sample/?$', 'admin_products_sample', name='admin_products_sample'),
+    url(r'^admin/products/sample/all/?$', 'admin_products_sample_all', name='admin_products_all'),
+    url(r'^admin/product/sample/add/?$', 'admin_product_sample_add', name='admin_product_sample_add'),
+    url(r'^admin/product/sample/deactivate/?$', 'admin_product_sample_deactivate', name='admin_product_sample_deactivate'),
+    url(r'^admin/product/sample/delete/(?P<pk>\d+)/?$', 'admin_product_sample_delete', name='admin_product_sample_delete'),
     # Translations Urls
     url(r'^i18n/', include('django.conf.urls.i18n')),
 )

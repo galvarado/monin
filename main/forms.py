@@ -27,18 +27,17 @@ class CategoryCreationForm(forms.ModelForm):
 
 class ProductCreationForm(forms.ModelForm):
     class Meta:
-        model = CategorySample
+        model = Product
         exclude = ('active',)
 
 class ProductSampleCreationForm(forms.ModelForm):
     class Meta:
-        model = CategorySample
+        model = ProductSample
         exclude = ('active',)
 
 class SiteConfigurationForm(forms.ModelForm):
     class Meta:
-        model = CategorySample
-        exclude = ('active',)
+        model = SiteConfiguration
 
 class ClientCreationForm(UserCreationForm):
     pass
