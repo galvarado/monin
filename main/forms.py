@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
-from main.models import Order
+from main.models import Order, CategorySample, Product, ProductSample, SiteConfiguration
 
 class AuthForm(AuthenticationForm):
     username = forms.CharField(label='Número de cliente')
@@ -19,6 +19,26 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         exclude = ('client', 'product')
+
+class CategoryCreationForm(forms.ModelForm):
+    class Meta:
+        model = CategorySample
+        exclude = ('active',)
+
+class ProductCreationForm(forms.ModelForm):
+    class Meta:
+        model = CategorySample
+        exclude = ('active',)
+
+class ProductSampleCreationForm(forms.ModelForm):
+    class Meta:
+        model = CategorySample
+        exclude = ('active',)
+
+class SiteConfigurationForm(forms.ModelForm):
+    class Meta:
+        model = CategorySample
+        exclude = ('active',)
 
 class ClientCreationForm(UserCreationForm):
     pass

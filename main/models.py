@@ -17,6 +17,17 @@ class Product(models.Model):
         verbose_name="Foto",
     )
 
+class CategorySample(models.Model):
+    '''
+    Class to define the Product sample model
+    '''
+    def __unicode__(self):
+        return self.name
+
+    name = models.CharField(max_length=100, verbose_name='Nombre')
+    active = models.BooleanField(default=True)
+
+
 class ProductSample(models.Model):
     '''
     Class to define the Product sample model
@@ -27,20 +38,6 @@ class ProductSample(models.Model):
     name = models.CharField(max_length=100, verbose_name='Nombre')
     active = models.BooleanField(default=True)
     category = models.ForeignKey(CategorySample, related_name='products_sample', verbose_name="Categoria")
-    photo = models.FileField(
-        upload_to='main/static/media/photos',
-        verbose_name="Foto",
-    )
-
-class CategorySample(models.Model):
-    '''
-    Class to define the Product sample model
-    '''
-    def __unicode__(self):
-        return self.name
-
-    name = models.CharField(max_length=100, verbose_name='Nombre')
-    active = models.BooleanField(default=True)
     photo = models.FileField(
         upload_to='main/static/media/photos',
         verbose_name="Foto",

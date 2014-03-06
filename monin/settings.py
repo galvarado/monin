@@ -124,6 +124,11 @@ SIZES = (
   ('15', 15),
   ('16', 16),
 )
+
+MEDIA_URL = '/'
+
+MEDIA_ROOT = ''
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 

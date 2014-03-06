@@ -15,8 +15,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import AdminPasswordChangeForm
 
 
-from main.forms import AccessForm, AuthForm, OrderForm, ClientCreationForm
-from main.models import Product
+from main.forms import AccessForm, AuthForm, OrderForm, ClientCreationForm, CategoryCreationForm, ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm
+from main.models import Product, ProductSample, SiteConfiguration, CategorySample
 
 
 # Auth views
@@ -411,6 +411,7 @@ def admin_login(request):
     })
 
 # Admin views
+
 @login_required
 @user_passes_test(lambda u: is_admin(u))
 def admin(request):
@@ -418,6 +419,47 @@ def admin(request):
     Shows index mobile page
     '''
     return render(request, "admin.html")
+
+@login_required
+def clients_all(request):
+    '''
+    Retrive all clients to fill the products table
+    '''
+    aaData = []
+    start = request.POST.get('iDisplayStart')
+    display_length = request.POST.get('iDisplayLength')
+    end = start + display_length
+    search = request.POST.get('sSearch')
+    sort = request.POST.get('iSortCol_0')
+    ORDER_BY_FIELDS = {
+        0: 'model',
+    }
+
+    if search:
+        clients = User.objects.filter(groups__name='client').filter(
+            Q(username=search)
+        )
+    else:
+        clients = User.objects.filter(groups__name='client')
+
+    count = clients.count()
+    for client in clients[start:end]:
+        label = 'Desactivar' if client.is_active else 'Activar   '
+        aaData.append([
+            client.username,
+            client.date_joined.strftime('%d-%m-%Y'),
+            client.last_login.strftime('%d-%m-%Y'),
+            'Activo' if client.is_active else 'Inactivo',
+            '<a href="/admin/clients/password/%s"><button type="button" class="btn btn-xs btn-info">Cambiar contraseña</button></a>&nbsp;<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/clients/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (client.pk, client.pk, label, client.pk),
+        ])
+    data = {
+        "iTotalRecords": count,
+        "iDisplayStart": start,
+        "iDisplayLength": display_length,
+        "iTotalDisplayRecords": count,
+        "aaData":aaData
+    }
+    return HttpResponse(json.dumps(data))
 
 @login_required
 @user_passes_test(lambda u: is_admin(u))
@@ -479,4 +521,93 @@ def admin_client_delete(request, pk):
         return redirect(reverse('admin'))
     return render(request, "admin_client_delete.html", {
         'user': user,
+    })
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_categories_sample(request):
+    '''
+    Shows categories sample page
+    '''
+    return render(request, "admin_categories_sample.html")
+
+@login_required
+def admin_categories_sample_all(request):
+    '''
+    Retrive all categories sample to fill the categories table
+    '''
+    aaData = []
+    start = request.POST.get('iDisplayStart')
+    display_length = request.POST.get('iDisplayLength')
+    end = start + display_length
+    search = request.POST.get('sSearch')
+    sort = request.POST.get('iSortCol_0')
+    ORDER_BY_FIELDS = {
+        0: 'model',
+    }
+
+    if search:
+        categories = CategorySample.objects.filter(
+            Q(name=search)
+        )
+    else:
+        categories = CategorySample.objects.all()
+
+    count = categories.count()
+    for category in categories[start:end]:
+        label = 'Desactivar' if category.active else 'Activar   '
+        aaData.append([
+            category.name,
+            'Activo' if category.active else 'Inactivo',
+            '<a href="%s"><button type="button" class="btn btn-xs btn-info">Ver foto</button></a>&nbsp;<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/categories/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (category.pk, category.pk, label, category.pk),
+        ])
+    data = {
+        "iTotalRecords": count,
+        "iDisplayStart": start,
+        "iDisplayLength": display_length,
+        "iTotalDisplayRecords": count,
+        "aaData":aaData
+    }
+    return HttpResponse(json.dumps(data))
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_category_sample_add(request):
+    '''
+    Shows add category sample page
+    '''
+    form = CategoryCreationForm()
+    if request.method == 'POST':
+        form = CategoryCreationForm(request.POST)
+        if form.is_valid():
+            category = form.save()
+            return redirect(reverse('admin_categories_sample'))
+    return render(request, "admin_category_sample_add.html", {
+        'form': form,
+    })
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_category_sample_deactivate(request):
+    '''
+    Shows deactivate category page
+    '''
+    if request.method == 'POST':
+        category = CategorySample.objects.get(pk=request.POST.get('pk'))
+        category.active = not category.active
+        category.save()
+        return HttpResponse(json.dumps({'response': 1}))
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_category_sample_delete(request, pk):
+    '''
+    Shows add client page
+    '''
+    category = CategorySample.objects.get(pk=pk)
+    if request.method == 'POST':
+        category.delete()
+        return redirect(reverse('admin'))
+    return render(request, "admin_category_sample_delete.html", {
+        'category': category,
     })

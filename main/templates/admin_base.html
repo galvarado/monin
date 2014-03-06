@@ -42,7 +42,7 @@
               <li {% if url == request.path %}class="active"{% endif %}>
                 <a href="{{ url }}"><i class="fa fa-dashboard"></i>Productos</a>
               </li>
-              {% url 'admin_users' as url %}
+              {% url 'admin_categories_sample' as url %}
               <li {% if url == request.path %}class="active"{% endif %}>
                 <a href="{{ url }}"><i class="fa fa-dashboard"></i>Categorias muestra</a>
               </li>
