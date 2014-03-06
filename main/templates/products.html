@@ -4,26 +4,16 @@
 <div class="container_alpha slider categories">
     <div id="menu" c class="png_bg menu2">
         <ul>
-            <li class="button filter" data-filter="category_1">Vestidos</li>
-            <li class="button filter" data-filter="category_2">Ropones</li>
-            <li class="button filter" data-filter="category_3">Trajes</li>
-            <li class="button filter" data-filter="category_3 category_1">Especiales</li>
+            {% for category in categories %}
+            <li class="button filter" data-filter="{{ category.name }}">{{ category.name }}</li>
+            {% endfor %}
         </ul>
     </div>
     <!-- GRID -->
     <ul id="Grid">
-        <li class="mix category_1" data-cat="1"><img src='{{ STATIC_URL }}images/img-01.jpg'></li>
-        <li class="mix category_1" data-cat="1"><img src='{{ STATIC_URL }}images/img-01.jpg'></li>
-        <li class="mix category_1" data-cat="1"><img src='{{ STATIC_URL }}images/img-01.jpg'></li>
-        <li class="mix category_1" data-cat="1"><img src='{{ STATIC_URL }}images/img-01.jpg'></li>
-        <li class="mix category_2" data-cat="2"><img src='{{ STATIC_URL }}images/img-02.jpg'></li>
-        <li class="mix category_2" data-cat="2"><img src='{{ STATIC_URL }}images/img-02.jpg'></li>
-        <li class="mix category_2" data-cat="2"><img src='{{ STATIC_URL }}images/img-02.jpg'></li>
-        <li class="mix category_2" data-cat="2"><img src='{{ STATIC_URL }}images/img-02.jpg'></li>
-        <li class="mix category_3" data-cat="3"><img src='{{ STATIC_URL }}images/img-03.jpg'></li>
-        <li class="mix category_3" data-cat="3"><img src='{{ STATIC_URL }}images/img-03.jpg'></li>
-        <li class="mix category_3" data-cat="3"><img src='{{ STATIC_URL }}images/img-03.jpg'></li>
-        <li class="mix category_3" data-cat="3"><img src='{{ STATIC_URL }}images/img-03.jpg'></li>
+        {% for product in products %}
+        <li class="mix {{ product.category.name }}" data-cat="{{ product.category.name }}"><img src='{{ product.photo.url }}'></li>
+        {% endfor %}
         <li class="gap"></li> <!-- "gap" elements fill in the gaps in justified grid -->
     </ul>
 </div>
@@ -32,11 +22,13 @@
 {{ block.super }}
 <script src="{{ STATIC_URL }}js/libs/jquery.mixitup.min.js"></script>
 <script>
+{% with first_category=categories.0.name %}
 $(document).ready(function () {
     $(function(){
-        $('#Grid').mixitup({'showOnLoad': 'category_1'});
+        $('#Grid').mixitup({'showOnLoad': '{{ first_category }}'});
     });
 });
+{% endwith %}
 </script>
 {% endblock js %}
 

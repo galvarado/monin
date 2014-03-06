@@ -127,9 +127,9 @@ SIZES = (
 
 MEDIA_URL = '/'
 
-MEDIA_ROOT = '/'
+MEDIA_ROOT = ''
 
-STATIC_ROOT = '/'
+STATIC_ROOT = ''
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/

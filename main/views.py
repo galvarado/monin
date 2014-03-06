@@ -165,7 +165,10 @@ def products(request):
     '''
     if not request.session.get('has_access') == True:
         return redirect('access')
-    return render(request, "products.html")
+    return render(request, "products.html", {
+        'categories': CategorySample.objects.filter(active=True),
+        'products': ProductSample.objects.filter(active=True),
+    })
 
 @login_required
 @user_passes_test(lambda u: is_client(u))
