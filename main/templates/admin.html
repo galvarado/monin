@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="toolbar">
-            <a href="">
+            <a href="{% url 'admin_client_add' %}">
                 <button type="button" class="btn btn-success">Agregar nuevo cliente</button>
             </a>
         </div>
@@ -62,6 +62,22 @@ $(function(){
             "success": fnCallback
             });
         }
+    });
+    $('table').bind('click', '.deactivate-button', function(event){
+        var object = $(event.target);
+        $.ajax({
+            url: "/admin/clients/deactivate",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                pk: object.data('id'),
+            },
+            success: function(data) {
+                if (data.response == 1) {
+                   datatable.fnDraw();
+                }
+            }
+        });
     });
 });
 </script>

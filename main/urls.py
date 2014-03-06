@@ -26,6 +26,11 @@ urlpatterns = patterns('main.views',
     # Admin Urls
     url(r'^admin/?$', 'admin_login', name='admin_login'),
     url(r'^admin/clients/?$', 'admin', name='admin'),
+    url(r'^admin/clients/add/?$', 'admin_client_add', name='admin_client_add'),
+    url(r'^admin/clients/password/(?P<pk>\d+)/?$', 'admin_client_password', name='admin_client_password'),
+    url(r'^admin/clients/deactivate/?$', 'admin_client_deactivate', name='admin_client_deactivate'),
+    url(r'^admin/clients/delete/(?P<pk>\d+)/?$', 'admin_client_delete', name='admin_client_delete'),
+
     # Translations Urls
     url(r'^i18n/', include('django.conf.urls.i18n')),
 )

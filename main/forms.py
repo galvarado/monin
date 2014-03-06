@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
 from main.models import Order
@@ -19,3 +19,6 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         exclude = ('client', 'product')
+
+class ClientCreationForm(UserCreationForm):
+    pass

@@ -11,8 +11,11 @@ from django.http import HttpResponseRedirect, HttpResponse , Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.contrib.auth.models import Group
+from django.contrib.auth.forms import AdminPasswordChangeForm
 
-from main.forms import AccessForm, AuthForm, OrderForm
+
+from main.forms import AccessForm, AuthForm, OrderForm, ClientCreationForm
 from main.models import Product
 
 
@@ -290,12 +293,13 @@ def clients_all(request):
 
     count = clients.count()
     for client in clients[start:end]:
+        label = 'Desactivar' if client.is_active else 'Activar   '
         aaData.append([
             client.username,
             client.date_joined.strftime('%d-%m-%Y'),
             client.last_login.strftime('%d-%m-%Y'),
             'Activo' if client.is_active else 'Inactivo',
-            '<a href=""><button type="button" class="btn btn-xs btn-info">Cambiar contraseña</button></a>&nbsp;<a href=""><button type="button" class="btn btn-xs btn-warning">Desactivar</button></a>&nbsp;<a href=""><button type="button" class="btn btn-xs btn-danger">Eliminar</button></a>',
+            '<a href="/admin/clients/password/%s"><button type="button" class="btn btn-xs btn-info">Cambiar contraseña</button></a>&nbsp;<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/clients/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (client.pk, client.pk, label, client.pk),
         ])
     data = {
         "iTotalRecords": count,
@@ -414,3 +418,65 @@ def admin(request):
     Shows index mobile page
     '''
     return render(request, "admin.html")
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_client_add(request):
+    '''
+    Shows add client page
+    '''
+    form = ClientCreationForm()
+    if request.method == 'POST':
+        form = ClientCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            Group.objects.get(name='client').user_set.add(user)
+            return redirect(reverse('admin'))
+    return render(request, "admin_client_add.html", {
+        'form': form,
+    })
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_client_password(request, pk):
+    '''
+    Shows change password page
+    '''
+    user = User.objects.get(pk=pk)
+    form = AdminPasswordChangeForm(user)
+    if request.method == 'POST':
+        form = AdminPasswordChangeForm(user, request.POST)
+        if form.is_valid():
+            user.set_password(form.cleaned_data.get('password1'))
+            user.save()
+            return redirect(reverse('admin'))
+    return render(request, "admin_client_password.html", {
+        'form': form,
+        'pk': pk,
+    })
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_client_deactivate(request):
+    '''
+    Shows add client page
+    '''
+    if request.method == 'POST':
+        user = User.objects.get(pk=request.POST.get('pk'))
+        user.is_active = not user.is_active
+        user.save()
+        return HttpResponse(json.dumps({'response': 1}))
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_client_delete(request, pk):
+    '''
+    Shows add client page
+    '''
+    user = User.objects.get(pk=pk)
+    if request.method == 'POST':
+        user.delete()
+        return redirect(reverse('admin'))
+    return render(request, "admin_client_delete.html", {
+        'user': user,
+    })
