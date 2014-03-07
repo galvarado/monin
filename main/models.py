@@ -15,6 +15,7 @@ class Product(models.Model):
     photo = models.FileField(
         upload_to='main/static/media/photos',
         verbose_name="Foto",
+        null=True,
     )
 
 class CategorySample(models.Model):
@@ -41,6 +42,7 @@ class ProductSample(models.Model):
     photo = models.FileField(
         upload_to='main/static/media/photos',
         verbose_name="Foto",
+        null=True,
     )
 
 class Order(models.Model):
