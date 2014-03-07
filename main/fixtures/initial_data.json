@@ -480,26 +480,6 @@
  }
 },
 {
- "pk": 1, 
- "model": "main.product", 
- "fields": {
-  "active": true, 
-  "photo": "main/static/media/photos/client_brief_3.jpg", 
-  "model": "Modelo1", 
-  "price": 100.0
- }
-},
-{
- "pk": 3, 
- "model": "main.product", 
- "fields": {
-  "active": true, 
-  "photo": "main/static/media/photos/busy_3.jpg", 
-  "model": "otro", 
-  "price": 10.0
- }
-},
-{
  "pk": 2, 
  "model": "main.categorysample", 
  "fields": {
