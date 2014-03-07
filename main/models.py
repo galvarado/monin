@@ -76,4 +76,4 @@ class SiteConfiguration(models.Model):
         verbose_name="Foto",
     )
     active_background = models.BooleanField(default=True)
-    email_to_notificatiosn = models.EmailField()
+    email_to_notifications = models.EmailField()
