@@ -25,6 +25,7 @@ urlpatterns = patterns('main.views',
     url(r'^mobile_order/?$', 'mobile_order', name='mobile_order'),
     # Admin Urls
     url(r'^admin/?$', 'admin_login', name='admin_login'),
+     url(r'^admin/config/?$', 'admin_config', name='admin_config'),
     url(r'^admin/clients/?$', 'admin', name='admin'),
     url(r'^admin/clients/add/?$', 'admin_client_add', name='admin_client_add'),
     url(r'^admin/clients/password/(?P<pk>\d+)/?$', 'admin_client_password', name='admin_client_password'),

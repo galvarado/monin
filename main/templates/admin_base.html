@@ -50,7 +50,7 @@
               <li {% if url == request.path %}class="active"{% endif %}>
                 <a href="{{ url }}"><i class="fa fa-bar-chart-o"></i>Productos muestra</a>
               </li>
-              {% url 'admin_users' as url %}
+              {% url 'admin_config' as url %}
               <li {% if url == request.path %}class="active"{% endif %}>
                 <a href="{{ url }}"><i class="fa fa-dashboard"></i>Configuración</a>
               </li>

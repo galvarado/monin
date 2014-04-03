@@ -46,3 +46,8 @@ class ContactFrom(forms.Form):
     name = forms.CharField(label='Nombre')
     email = forms.EmailField(label='Email')
     message = forms.CharField(label='Mensaje', widget=forms.Textarea())
+
+class ConfigForm(forms.ModelForm):
+    class Meta:
+        model = SiteConfiguration
+
