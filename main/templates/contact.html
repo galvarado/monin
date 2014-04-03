@@ -1,2 +1,35 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% block main-content %}
+<div class="container_omega">
+    {% if info %}
+    <h1>{{ info }}</h1>
+    {% else %}
+    <div class="gs_4"><h3>Mándanos un mensaje, a continuación completa los datos</h3>
+    <!-- Contact form starts -->
+        <form method="post" action="{% url 'contact' %}">
+            <div id="form_container">
+                <div id="form_main">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    {{ field.label }}
+                    {{ field }}
+                    {% if field.errors %}
+                    {% for error in field.errors %}
+                    <p class="error">{{ error }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+                    {% for error in form_errors %}
+                    <p class="error">{{ error }}</p>
+                    {% endfor %}
+                    <p><input type="submit" id="submit" value="Enviar" class="superbutton"></p>
+                    <ul id="form_response"><li></li></ul>
+                </div>
+            </div>
+        </form>
+    <!-- Contact form Ends -->
+    </div>
+    {% endif %}
+</div>
+{% endblock main-content %}

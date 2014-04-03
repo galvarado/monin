@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 import json
 
 from django.conf import settings
@@ -15,7 +14,9 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import AdminPasswordChangeForm
 
 
-from main.forms import AccessForm, AuthForm, OrderForm, ClientCreationForm, CategoryCreationForm, ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm
+from main.forms import (AccessForm, AuthForm, OrderForm, ClientCreationForm, CategoryCreationForm,
+                        ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm,
+                        ContactFrom)
 from main.models import Product, ProductSample, SiteConfiguration, CategorySample
 
 
@@ -350,7 +351,18 @@ def contact(request):
     '''
     Shows contact page
     '''
-    return render(request, "contact.html")
+    form = ContactFrom()
+    info = ''
+    if request.method == 'POST':
+        form = ContactFrom(request.POST)
+        if form.is_valid():
+            message = '%s con cuenta de correo:%s escribio un mensaje: %s' % (
+                form.cleaned_data.get('name'), form.cleaned_data.get('email'), 
+                form.cleaned_data.get('message')
+            )
+            send_mail(settings.SUBJECT, message, settings.FROM, [settings.TO], fail_silently=False)
+            info = 'Tu mensaje se ha sido enviado, gracias por contactarnos. Estaremos respondiendo a la brevedad'
+    return render(request, "contact.html", {'form': form, 'info': info})
 
 
 # Mobile views
