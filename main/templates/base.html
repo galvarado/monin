@@ -33,7 +33,7 @@
 
 </head>
 
-<body>
+<body {% if config.active_background and config.background %}style='background: url({{ config.background.url }}) !important'{% endif %}>
   <div id="container">
     <!-- Header -->
     <div id="header">

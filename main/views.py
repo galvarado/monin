@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 import json
 
 from django.conf import settings
@@ -14,8 +13,9 @@ from django.db.models import Q
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import AdminPasswordChangeForm
 
-
-from main.forms import AccessForm, AuthForm, OrderForm, ClientCreationForm,CategoryCreationForm, CategorySampleCreationForm, ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm, ImageSliderCreationForm
+from main.forms import (AccessForm, AuthForm, OrderForm, ClientCreationForm, CategoryCreationForm,
+                        ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm,
+                        ContactFrom, ConfigForm)
 from main.models import Product, ProductSample, SiteConfiguration, CategorySample, Category, ImageSlider
 
 
@@ -134,7 +134,7 @@ def access(request):
             \n\nEstos son los datos: \nNombre: %s \nCiudad: %s \nCorreo: %s
             ''' % (form.cleaned_data.get('name'), form.cleaned_data.get('city'), form.cleaned_data.get('email'))
 
-            send_mail(settings.SUBJECT, message, settings.FROM, [settings.TO], fail_silently=False)
+            send_mail(settings.SUBJECT, message, settings.FROM, [SiteConfiguration.objects.all().first().email_to_notifications], fail_silently=False)
             return redirect('products')
     return render(request, "access.html", {
         'form': form,
@@ -223,7 +223,7 @@ def order_do(request,):
     for order in orders:
         message += 'Modelo:%s Talla:%s  Color:%s Cantidad:%s Precio:%s \n' % (order.product.model, order.size, order.color, order.quantity, order.product.price)
 
-    send_mail(settings.SUBJECT, message, settings.FROM, [settings.TO], fail_silently=False)
+    send_mail(settings.SUBJECT, message, settings.FROM, [SiteConfiguration.objects.all().first().email_to_notifications], fail_silently=False)
     for order in orders:
         order.delete()
     return HttpResponse(json.dumps({'response': 1}))
@@ -350,7 +350,18 @@ def contact(request):
     '''
     Shows contact page
     '''
-    return render(request, "contact.html")
+    form = ContactFrom()
+    info = ''
+    if request.method == 'POST':
+        form = ContactFrom(request.POST)
+        if form.is_valid():
+            message = '%s con cuenta de correo:%s escribio un mensaje: %s' % (
+                form.cleaned_data.get('name'), form.cleaned_data.get('email'), 
+                form.cleaned_data.get('message')
+            )
+            send_mail(settings.SUBJECT, message, settings.FROM, [SiteConfiguration.objects.all().first().email_to_notifications], fail_silently=False)
+            info = 'Tu mensaje se ha sido enviado, gracias por contactarnos. Estaremos respondiendo a la brevedad'
+    return render(request, "contact.html", {'form': form, 'info': info})
 
 
 # Mobile views
@@ -387,7 +398,7 @@ def mobile_order(request):
             if request.POST.get('active-%s' % i) == '1':
                 message += 'Modelo:%s Talla:%s  Color:%s Cantidad:%s Precio:%s \n' % (request.POST.get('model-' + str(i)), request.POST.get('size-' + str(i)), request.POST.get('color-' + str(i)), request.POST.get('quantity-' + str(i)), request.POST.get('price-' + str(i)))
 
-        send_mail(settings.SUBJECT, message, settings.FROM, [settings.TO], fail_silently=False)
+        send_mail(settings.SUBJECT, message, settings.FROM, [SiteConfiguration.objects.all().first().email_to_notifications], fail_silently=False)
         return render(request, "mobile_order_sent.html")
     return render(request, "mobile_order.html", {
         'loop': [i+1 for i in range(16)]
@@ -463,6 +474,23 @@ def clients_all(request):
         "aaData":aaData
     }
     return HttpResponse(json.dumps(data))
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_config(request):
+    '''
+    Shows config page
+    '''
+    info = ''
+    form = ConfigForm(instance=SiteConfiguration.objects.all().first())
+    if request.method == 'POST':
+        form = ConfigForm(request.POST, request.FILES, instance=SiteConfiguration.objects.all().first())
+        if form.is_valid():
+            form.save()
+            info = 'Se ha guardado de forma correcta la configuracion'
+    return render(request, "admin_config.html", {
+        'form': form,
+        'info': info,
+    })
 
 @login_required
 @user_passes_test(lambda u: is_admin(u))

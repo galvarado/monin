@@ -96,14 +96,13 @@ class Order(models.Model):
 
 class SiteConfiguration(models.Model):
     '''
-    Class to define the Product sample model
+    Class to define configurations
     '''
-    def __unicode__(self):
-        return self.name
-
     background = models.FileField(
         upload_to='main/static/media/photos',
-        verbose_name="Foto",
+        verbose_name="Fondo de sitio",
+        null=True,
+        blank=True,
     )
-    active_background = models.BooleanField(default=True)
-    email_to_notifications = models.EmailField()
+    active_background = models.BooleanField(default=False, verbose_name="Activar fondo")
+    email_to_notifications = models.EmailField(verbose_name="Correo de notificaciones", null=True, blank=True)
