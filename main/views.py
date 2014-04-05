@@ -15,8 +15,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import AdminPasswordChangeForm
 
 
-from main.forms import AccessForm, AuthForm, OrderForm, ClientCreationForm, CategoryCreationForm, ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm
-from main.models import Product, ProductSample, SiteConfiguration, CategorySample
+from main.forms import AccessForm, AuthForm, OrderForm, ClientCreationForm,CategoryCreationForm, CategorySampleCreationForm, ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm, ImageSliderCreationForm
+from main.models import Product, ProductSample, SiteConfiguration, CategorySample, Category, ImageSlider
 
 
 # Auth views
@@ -579,9 +579,9 @@ def admin_category_sample_add(request):
     '''
     Shows add category sample page
     '''
-    form = CategoryCreationForm()
+    form = CategorySampleCreationForm()
     if request.method == 'POST':
-        form = CategoryCreationForm(request.POST)
+        form = CategorySampleCreationForm(request.POST)
         if form.is_valid():
             category = form.save()
             return redirect(reverse('admin_categories_sample'))
@@ -794,4 +794,183 @@ def admin_product_delete(request, pk):
         return redirect(reverse('admin_products'))
     return render(request, "admin_product_delete.html", {
         'product': product,
+    })
+
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_sliders(request):
+    '''
+    Shows sliders sample page
+    '''
+    return render(request, "admin_sliders.html")
+
+@login_required
+def admin_sliders_all(request):
+    '''
+    Retrive all sliders sample to fill the sliders table
+    '''
+    aaData = []
+    start = request.POST.get('iDisplayStart')
+    display_length = request.POST.get('iDisplayLength')
+    end = start + display_length
+    search = request.POST.get('sSearch')
+    sort = request.POST.get('iSortCol_0')
+    ORDER_BY_FIELDS = {
+        0: 'model',
+    }
+
+    if search:
+        sliders = ImageSlider.objects.filter(
+            Q(name__icontains=search)
+        )
+    else:
+        sliders = ImageSlider.objects.all()
+
+    count = sliders.count()
+    for slider in sliders[start:end]:
+        label = 'Desactivar' if slider.active else 'Activar   '
+        aaData.append([
+            slider.name,
+            'Activo' if slider.active else 'Inactivo',
+            '<a href="%s"><button type="button" class="btn btn-xs btn-info">Ver foto</button></a>&nbsp;<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/slider/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (slider.photo.url, slider.pk, label, slider.pk),
+        ])
+    data = {
+        "iTotalRecords": count,
+        "iDisplayStart": start,
+        "iDisplayLength": display_length,
+        "iTotalDisplayRecords": count,
+        "aaData":aaData
+    }
+    return HttpResponse(json.dumps(data))
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_slider_add(request):
+    '''
+    Shows add slider sample page
+    '''
+    form = ImageSliderCreationForm()
+    if request.method == 'POST':
+        form = ImageSliderCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            slider = form.save()
+            return redirect(reverse('admin_sliders'))
+    return render(request, "admin_slider_add.html", {
+        'form': form,
+    })
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_slider_deactivate(request):
+    '''
+    Shows deactivate slider page
+    '''
+    if request.method == 'POST':
+        slider = ImageSlider.objects.get(pk=request.POST.get('pk'))
+        slider.active = not slider.active
+        slider.save()
+        return HttpResponse(json.dumps({'response': 1}))
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_slider_delete(request, pk):
+    '''
+    Shows delete slider page
+    '''
+    slider = ImageSlider.objects.get(pk=pk)
+    if request.method == 'POST':
+        slider.delete()
+        return redirect(reverse('admin_sliders'))
+    return render(request, "admin_slider_delete.html", {
+        'slider': slider,
+    })
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_categories(request):
+    '''
+    Shows categories  page
+    '''
+    return render(request, "admin_categories.html")
+
+@login_required
+def admin_categories_all(request):
+    '''
+    Retrive all categories  to fill the categories table
+    '''
+    aaData = []
+    start = request.POST.get('iDisplayStart')
+    display_length = request.POST.get('iDisplayLength')
+    end = start + display_length
+    search = request.POST.get('sSearch')
+    sort = request.POST.get('iSortCol_0')
+    ORDER_BY_FIELDS = {
+        0: 'model',
+    }
+
+    if search:
+        categories = Category.objects.filter(
+            Q(name__icontains=search)
+        )
+    else:
+        categories = Category.objects.all()
+
+    count = categories.count()
+    for category in categories[start:end]:
+        label = 'Desactivar' if category.active else 'Activar   '
+        aaData.append([
+            category.name,
+            'Activo' if category.active else 'Inactivo',
+            '<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/category/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (category.pk, label, category.pk),
+        ])
+    data = {
+        "iTotalRecords": count,
+        "iDisplayStart": start,
+        "iDisplayLength": display_length,
+        "iTotalDisplayRecords": count,
+        "aaData":aaData
+    }
+    return HttpResponse(json.dumps(data))
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_category_add(request):
+    '''
+    Shows add category sample page
+    '''
+    form = CategoryCreationForm()
+    if request.method == 'POST':
+        form = CategoryCreationForm(request.POST)
+        if form.is_valid():
+            category = form.save()
+            return redirect(reverse('admin_categories'))
+    return render(request, "admin_category_add.html", {
+        'form': form,
+    })
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_category_deactivate(request):
+    '''
+    Shows deactivate category page
+    '''
+    if request.method == 'POST':
+        category = Category.objects.get(pk=request.POST.get('pk'))
+        category.active = not category.active
+        category.save()
+        return HttpResponse(json.dumps({'response': 1}))
+
+@login_required
+@user_passes_test(lambda u: is_admin(u))
+def admin_category_delete(request, pk):
+    '''
+    Shows add category page
+    '''
+    category = Category.objects.get(pk=pk)
+    if request.method == 'POST':
+        category.delete()
+        return redirect(reverse('admin_categories'))
+    return render(request, "admin_category_delete.html", {
+        'category': category,
     })

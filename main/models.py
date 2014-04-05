@@ -2,6 +2,20 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
+class Category(models.Model):
+    '''
+    Class to define the Product sample model
+    '''
+    def __unicode__(self):
+        return self.name
+
+    name = models.CharField(max_length=100, verbose_name='Nombre')
+    active = models.BooleanField(default=True)
+    photo = models.FileField(
+        upload_to='main/static/media/photos',
+        verbose_name="Foto",
+    )
+
 class Product(models.Model):
     '''
     Class to define the Product model
@@ -11,6 +25,22 @@ class Product(models.Model):
 
     model = models.CharField(max_length=100, verbose_name='Nombre')
     price = models.FloatField(verbose_name='Precio')
+    active = models.BooleanField(default=True)
+    photo = models.FileField(
+        upload_to='main/static/media/photos',
+        verbose_name="Foto",
+    )
+    category = models.ForeignKey(Category, related_name='products', verbose_name="Categoria")
+
+
+class ImageSlider(models.Model):
+    '''
+    Class to define the Product model
+    '''
+    def __unicode__(self):
+        return self.model
+
+    name = models.CharField(max_length=100, verbose_name='Nombre')
     active = models.BooleanField(default=True)
     photo = models.FileField(
         upload_to='main/static/media/photos',

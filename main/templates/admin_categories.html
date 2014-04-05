@@ -2,7 +2,7 @@
 {% block main-content %}
 <div class="row">
     <div class="col-lg-12">
-        <h1>Categorías muestra<small>catálogo</small></h1>
+        <h1>Categorías <small>catálogo</small></h1>
       </div>
 </div>
 <div class="row">
@@ -38,7 +38,7 @@ $(function(){
         "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
         "sPaginationType": "bootstrap",
         "bProcessing": true,
-        "sAjaxSource": "/admin/categories/sample/all",
+        "sAjaxSource": "/admin/categories/all",
         "bServerSide": true,
         "oLanguage": {
           "sUrl": STATIC_URL + "js/libs/dataTables.spanish.txt"
@@ -62,7 +62,7 @@ $(function(){
     $('table').bind('click', '.deactivate-button', function(event){
         var object = $(event.target);
         $.ajax({
-            url: "/admin/category/sample/deactivate",
+            url: "/admin/category/deactivate",
             type: 'post',
             dataType: 'json',
             data: {

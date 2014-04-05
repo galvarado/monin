@@ -38,6 +38,10 @@
               <li {% if url == request.path %}class="active"{% endif %}>
                 <a href="{{ url }}"><i class="fa fa-dashboard"></i>Clientes</a>
               </li>
+              {% url 'admin_categories' as url %}
+              <li {% if url == request.path %}class="active"{% endif %}>
+                <a href="{{ url }}"><i class="fa fa-dashboard"></i>Categorias</a>
+              </li>
               {% url 'admin_products' as url %}
               <li {% if url == request.path %}class="active"{% endif %}>
                 <a href="{{ url }}"><i class="fa fa-dashboard"></i>Productos</a>
@@ -49,6 +53,10 @@
               {% url 'admin_products_sample' as url %}
               <li {% if url == request.path %}class="active"{% endif %}>
                 <a href="{{ url }}"><i class="fa fa-bar-chart-o"></i>Productos muestra</a>
+              </li>
+              {% url 'admin_sliders' as url %}
+              <li {% if url == request.path %}class="active"{% endif %}>
+                <a href="{{ url }}"><i class="fa fa-bar-chart-o"></i>Sliders</a>
               </li>
               {% url 'admin_users' as url %}
               <li {% if url == request.path %}class="active"{% endif %}>
