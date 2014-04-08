@@ -15,7 +15,7 @@ from django.contrib.auth.forms import AdminPasswordChangeForm
 
 from main.forms import (AccessForm, AuthForm, OrderForm, ClientCreationForm, CategoryCreationForm,
                         ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm,
-                        ContactFrom, ConfigForm)
+                        ContactFrom, ConfigForm, ImageSliderCreationForm)
 from main.models import Product, ProductSample, SiteConfiguration, CategorySample, Category, ImageSlider
 
 
@@ -103,7 +103,10 @@ def index(request):
     '''
     Shows index page
     '''
-    return render(request, "index.html")
+    sliders = ImageSlider.objects.filter(active=True)
+    return render(request, "index.html", {
+        'sliders': sliders,
+    })
 
 def home(request):
     '''

@@ -68,9 +68,9 @@
             {% block main-content %}
             <div class="container_alpha slider">
                 <div id="slider" class="nivoSlider">
-                    <img src="{{ STATIC_URL }}images/slides/slide1.png" alt=""/>
-                    <img src="{{ STATIC_URL }}images/slides/slide2.png" alt="" />
-                    <img src="{{ STATIC_URL }}images/slides/slide3.jpg" alt="" />
+                  {% for slider in sliders %}
+                    <img src="{{slider.photo.url }}" alt=""/>
+                  {% endfor %}
                 </div>
                 <div class="loader"></div>
             </div>
@@ -83,7 +83,7 @@
   {% block js %}
   <!-- Javascript at the bottom for fast page loading -->
     <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="{{ STATIC_URL }}js/libs/jquery-1.4.2.min.js"></script>
   <!-- scripts concatenated and minified via ant build script-->
   <script src="{{ STATIC_URL }}js/libs/ajax.csrf.js"></script>
   <script src="{{ STATIC_URL }}js/libs/jquery.dataTables.min.js"></script>

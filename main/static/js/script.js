@@ -148,12 +148,12 @@ jQuery(window).load(function(){
     jQuery('.inner_main .loader').css({display: "none"});
     /* Innitialize Nivo Slider */
     jQuery('#slider').nivoSlider({
-    directionNav:false,
-    captionOpacity:1,
-    slices:10,
-    pauseTime:6000,
-    keyboardNav:true,
-    pauseOnHover:true
+        directionNav:false,
+        captionOpacity:1,
+        slices:10,
+        pauseTime:4000,
+        keyboardNav:true,
+        pauseOnHover:false
     });
 
     /* Add special rounded corners to the Slider */
