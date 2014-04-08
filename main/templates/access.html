@@ -2,7 +2,16 @@
 {% load i18n %}
 {% block main-content %}
 <div class="container_omega">
-    <div class="gs_4"><h3>Por favor proporciona los siguientes datos</h3>
+    <div class="gs_6">
+        <h3>Este es un texto de ejemplo que habla de los productos.</h3>
+        <div id="slider" class="nivoSlider">
+          {% for slider in sliders %}
+            <img style="width: 400px; height: 320px;" src="{{slider.photo.url }}" alt=""/>
+          {% endfor %}
+        </div>
+        <div class="loader"></div>
+    </div>
+    <div class="gs_5"><h3>Proporciona los siguientes datos para ver el catálogo completo de inmediato.</h3>
     <!-- Contact form starts -->
         <form method="post" action="{% url 'access' %}">
             <div id="form_container">

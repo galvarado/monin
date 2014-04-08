@@ -103,7 +103,7 @@ def index(request):
     '''
     Shows index page
     '''
-    sliders = ImageSlider.objects.filter(active=True)
+    sliders = ImageSlider.objects.filter(active=True, category='1')
     return render(request, "index.html", {
         'sliders': sliders,
     })
@@ -112,7 +112,10 @@ def home(request):
     '''
     Shows home page
     '''
-    return render(request, "home.html")
+    sliders = ImageSlider.objects.filter(active=True, category='1')
+    return render(request, "home.html", {
+        'sliders': sliders,
+    })
 
 def our(request):
     '''
@@ -127,6 +130,7 @@ def access(request):
     if request.session.get('has_access') == True:
         return redirect('products')
 
+    sliders = ImageSlider.objects.filter(active=True, category='2')
     form = AccessForm()
     if request.method == 'POST':
         form = AccessForm(request.POST)
@@ -141,6 +145,7 @@ def access(request):
             return redirect('products')
     return render(request, "access.html", {
         'form': form,
+        'sliders':sliders,
     })
 
 def clients(request):
@@ -863,6 +868,7 @@ def admin_sliders_all(request):
         label = 'Desactivar' if slider.active else 'Activar   '
         aaData.append([
             slider.name,
+            'Principal' if slider.category == '1' else 'Productos',
             'Activo' if slider.active else 'Inactivo',
             '<a href="%s"><button type="button" class="btn btn-xs btn-info">Ver foto</button></a>&nbsp;<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/slider/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (slider.photo.url, slider.pk, label, slider.pk),
         ])

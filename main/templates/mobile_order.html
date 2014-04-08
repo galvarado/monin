@@ -2,6 +2,12 @@
 {% block main-content %}
 <div data-role="fieldcontain">
     <form method="post" action="{% url 'mobile_order' %}" data-ajax="false">{% csrf_token %}
+        <fieldset class="ui-grid-a">
+            <div class="ui-block-a">
+                <label for="model-1">Nombre de Cliente</label>
+                <input type="text" name="name-1" id="name-1" placeholder="" value="">
+            </div>
+        </fieldset>
         {% include 'mobile_order_fields.html' %}
         {% include 'mobile_order_fields2.html' %}
         {% include 'mobile_order_fields3.html' %}

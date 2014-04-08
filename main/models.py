@@ -39,13 +39,17 @@ class ImageSlider(models.Model):
     '''
     def __unicode__(self):
         return self.model
-
+    CATEGORY_CHOICES = (
+        ('1', 'Slider principal'),
+        ('2', 'Slider productos'),
+    )
     name = models.CharField(max_length=100, verbose_name='Nombre')
     active = models.BooleanField(default=True)
     photo = models.FileField(
         upload_to='main/static/media/photos',
         verbose_name="Foto",
     )
+    category = models.CharField(max_length=1, verbose_name='Categoria', choices=CATEGORY_CHOICES, default='1')
 
 class CategorySample(models.Model):
     '''
