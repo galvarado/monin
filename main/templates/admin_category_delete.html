@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1><small>Eliminar categoría</small></h1>
-      <form action="{% url 'admin_category_sample_delete' category.pk %}" method="POST" class="form-horizontal">
+      <form action="{% url 'admin_category_delete' category.pk %}" method="POST" class="form-horizontal">
         {% csrf_token%}
         Estas seguro que quieres eliminar la categoría {{ category.name }}?
        <div class="form-group">

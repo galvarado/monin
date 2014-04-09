@@ -2397,3 +2397,11 @@ vertical-align: middle;
 #id_quantity {
     width: 10% !important;
 }
+.alert-error{color:red;}
+
+.category-product {
+  float: left;
+  margin: 10px;
+  width:220px;
+  height:170px;
+}

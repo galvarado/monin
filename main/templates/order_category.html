@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block main-content %}
+<div class="container_omega">
+    {% for product in products %}
+        <div class='product-product'>
+            <h3>{{ product.model }}</h3>
+            <a href='#'><img src='{{ product.photo.url }}'></a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock main-content %}

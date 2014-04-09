@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  $('#id_price').focusout(function(){
+    $(this).currency();
+  });
   // Only one checkbox can be selected at time
   $('table').bind('click', 'input[type="checkbox"]', function(event){
     // If the checkbox is already checked
@@ -26,63 +29,3 @@ function uncheckAllCheckbox() {
     $(this).attr('checked', false);
   });
 }
-
-
-$(document).ready(function () {
-  // Activate or deactivate Toolbar
-
-  /*
-  $("#delete-user-btn").click(function(){
-     var row_id = $('input[type="checkbox"]:checked').attr('data-id');
-        $.ajax({
-          type: "POST",
-          url: "/publisher/sites/delete/",
-          data: 'id=' + row_id,
-          success: function(result)
-            {
-               alert("site eliminado");         
-
-            } 
-        });
-
-       return false;
-
-     
-});
-*/
-
-//$('#myModal').modal();
-
-
-
-
- $("#delete-user-btn").click(function(){
-     var row_id = $('input[type="checkbox"]:checked').attr('data-id');
-       ('#myModal').modal();
-
-
-       return false;
-
-     
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-});

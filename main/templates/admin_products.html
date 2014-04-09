@@ -19,7 +19,8 @@
         <table cellpadding="0" cellspacing="0" border="0" id="products-datatable" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Nombre</th>
+                    <th>Modelo</th>
+                    <th>Categoria</th>
                     <th>Precio</th>
                     <th>Estatus</th>
                     <th>Acción</th>
@@ -45,7 +46,8 @@ $(function(){
           "sUrl": STATIC_URL + "js/libs/dataTables.spanish.txt"
         },
         "aoColumns": [
-            { "sWidth": "30%" ,"bSortable": false },
+            { "sWidth": "25%" ,"bSortable": false },
+            { "sWidth": "10%" ,"bSortable": false },
             { "sWidth": "15%" ,"bSortable": false },
             { "sWidth": "15%" ,"bSortable": false },
             { "sWidth": "15%" ,"bSortable": false },

@@ -15,7 +15,7 @@ from django.contrib.auth.forms import AdminPasswordChangeForm
 
 from main.forms import (AccessForm, AuthForm, OrderForm, ClientCreationForm, CategoryCreationForm,
                         ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm,
-                        ContactFrom, ConfigForm, ImageSliderCreationForm)
+                        ContactFrom, ConfigForm, ImageSliderCreationForm, CategorySampleCreationForm)
 from main.models import Product, ProductSample, SiteConfiguration, CategorySample, Category, ImageSlider
 
 
@@ -184,7 +184,22 @@ def order(request):
     '''
     Shows order page
     '''
-    return render(request, "order.html")
+    categories = Category.objects.filter(active=True)
+    return render(request, "order.html", {
+        'categories': categories,
+    })
+
+
+@login_required
+@user_passes_test(lambda u: is_client(u))
+def order_category(request, pk):
+    '''
+    Shows order category page
+    '''
+    products = Product.objects.filter(active=True, category__pk=pk)
+    return render(request, "order_category.html", {
+        'products': products,
+    })
 
 @login_required
 @user_passes_test(lambda u: is_client(u))
@@ -777,7 +792,8 @@ def admin_products_all(request):
         label = 'Desactivar' if product.active else 'Activar   '
         aaData.append([
             product.model,
-            product.price,
+            product.category.name,
+            '$%s' % round(product.price, 2),
             'Activo' if product.active else 'Inactivo',
             '<a href="%s"><button type="button" class="btn btn-xs btn-info">Ver foto</button></a>&nbsp;<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/product/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (product.photo.url, product.pk, label, product.pk),
         ])
@@ -798,7 +814,10 @@ def admin_product_add(request):
     '''
     form = ProductCreationForm()
     if request.method == 'POST':
-        form = ProductCreationForm(request.POST, request.FILES)
+        data = request.POST.copy()
+        for d in data:
+            data[d] = data[d].replace('$', '').replace(',', '')
+        form = ProductCreationForm(data, request.FILES)
         if form.is_valid():
             product = form.save()
             return redirect(reverse('admin_products'))
@@ -978,7 +997,7 @@ def admin_category_add(request):
     '''
     form = CategoryCreationForm()
     if request.method == 'POST':
-        form = CategoryCreationForm(request.POST)
+        form = CategoryCreationForm(request.POST, request.FILES)
         if form.is_valid():
             category = form.save()
             return redirect(reverse('admin_categories'))
