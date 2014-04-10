@@ -460,13 +460,28 @@ def mobile_order(request):
     Shows order page
     '''
     if request.method == 'POST':
-        message = 'Pedido realizado desde  www.monin.com.mx:\n\n'
+        orders = []
         for i in range(15):
             i = i + 1 
             if request.POST.get('active-%s' % i) == '1':
-                message += 'Modelo:%s Talla:%s  Color:%s Cantidad:%s Precio:%s \n' % (request.POST.get('model-' + str(i)), request.POST.get('size-' + str(i)), request.POST.get('color-' + str(i)), request.POST.get('quantity-' + str(i)), request.POST.get('price-' + str(i)))
-
-        send_mail(settings.SUBJECT, message, settings.FROM, [SiteConfiguration.objects.all().first().email_to_notifications], fail_silently=False)
+                orders.insert(0, [
+                    request.POST.get('model-' + str(i)),
+                    request.POST.get('color-' + str(i)),
+                    request.POST.get('quantity-' + str(i)),
+                    request.POST.get('size-' + str(i)),
+                ])
+        #import pdb; pdb.set_trace()
+        c = Context({
+            'orders': orders,
+            'username': request.user.username,
+            'client': request.POST.get('name-1'),
+        })
+        text_content = render_to_string('mail/order_from_mobile.txt', c)
+        html_content = render_to_string('mail/order_from_mobile.html', c)
+        email = EmailMultiAlternatives(settings.SUBJECT, text_content)
+        email.attach_alternative(html_content, "text/html")
+        email.to = [SiteConfiguration.objects.all().first().email_to_notifications]
+        email.send()
         return render(request, "mobile_order_sent.html")
     return render(request, "mobile_order.html", {
         'loop': [i+1 for i in range(16)]
