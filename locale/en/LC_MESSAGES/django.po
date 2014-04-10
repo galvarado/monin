@@ -1,46 +1,81 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-28 19:23+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+#: main/forms.py:11
+msgid "Numero de cliente"
+msgstr "Client number"
 
-#: main/templates/home.html:44
+#: main/forms.py:15 main/forms.py:57
+msgid "Nombre"
+msgstr "Name"
+
+#: main/forms.py:17
+msgid "Ciudad"
+msgstr "City"
+
+#: main/forms.py:59
+msgid "Mensaje"
+msgstr "Message"
+
+#: main/templates/access.html:6
+msgid "Este es un texto de ejemplo que habla de los productos"
+msgstr "This is an example that spoke about products"
+
+#: main/templates/access.html:14
+msgid ""
+"Proporciona los siguientes datos para ver el catalogo completo de inmediato"
+msgstr "Provide the data below to access full catalog"
+
+#: main/templates/access.html:29 main/templates/clients.html:23
+#: main/templates/contact.html:26
+msgid "Enviar"
+msgstr "Send"
+
+#: main/templates/base.html:50
 msgid "Inicio"
 msgstr "Home"
 
-#: main/templates/home.html:45
+#: main/templates/base.html:52
 msgid "Nosotros"
 msgstr "Our"
 
-#: main/templates/home.html:46
+#: main/templates/base.html:55
 msgid "Productos"
 msgstr "Products"
 
-#: main/templates/home.html:47
+#: main/templates/base.html:57
 msgid "Acceso a Clientes"
-msgstr "Clients"
+msgstr "Client access"
 
-#: main/templates/home.html:48
+#: main/templates/base.html:59
 msgid "Contacto"
 msgstr "Contact"
 
-#: monin/settings.py:82
-msgid "Espanol"
-msgstr ""
+#: main/templates/clients.html:5
+msgid "Bienvenido, ingresa tus datos para poder continuar"
+msgstr "Welcome, provide your data to continue"
 
-#: monin/settings.py:83
+#: main/templates/contact.html:8
+msgid "Mandanos un mensaje, a continuacion completa los datos"
+msgstr "Send us a message, complete the data below"
+
+#: monin/settings.py:91
+msgid "Espanol"
+msgstr "Spanish"
+
+#: monin/settings.py:92
 msgid "Ingles"
-msgstr ""
+msgstr "English"
+
+#: monin/settings.py:104
+msgid "Negro"
+msgstr "Balck"
+
+#: monin/settings.py:105
+msgid "Blanco"
+msgstr "White"
+
+#: monin/settings.py:106
+msgid "Biege"
+msgstr "Biege"
+
+#: monin/settings.py:107
+msgid "Marino"
+msgstr "Blue"

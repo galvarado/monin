@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block main-content %}
 <div class="container_omega">
-    <div class="gs_4"><h3>Bienvenido, ingresa tus datos para poder continuar</h3>
+    <div class="gs_4"><h3>{% trans 'Bienvenido, ingresa tus datos para poder continuar' %}</h3>
     <!-- Contact form starts -->
         <form method="post" action="{% url 'clients' %}">
             <div id="form_container">
@@ -20,7 +20,7 @@
                     {% for error in form_errors %}
                     <p class="error">{{ error }}</p>
                     {% endfor %}
-                    <p><input type="submit" id="submit" value="Enviar" class="superbutton"></p>
+                    <p><input type="submit" id="submit" value="{% trans 'Enviar' %}" class="superbutton"></p>
                     <ul id="form_response"><li></li></ul>
                 </div>
             </div>

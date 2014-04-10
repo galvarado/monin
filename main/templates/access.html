@@ -3,7 +3,7 @@
 {% block main-content %}
 <div class="container_omega">
     <div class="gs_6">
-        <h3>Este es un texto de ejemplo que habla de los productos.</h3>
+        <h3>{% trans 'Este es un texto de ejemplo que habla de los productos' %}</h3>
         <div id="slider" class="nivoSlider">
           {% for slider in sliders %}
             <img style="width: 400px; height: 320px;" src="{{slider.photo.url }}" alt=""/>
@@ -11,7 +11,7 @@
         </div>
         <div class="loader"></div>
     </div>
-    <div class="gs_5"><h3>Proporciona los siguientes datos para ver el catálogo completo de inmediato.</h3>
+    <div class="gs_5"><h3>{% trans 'Proporciona los siguientes datos para ver el catalogo completo de inmediato' %}</h3>
     <!-- Contact form starts -->
         <form method="post" action="{% url 'access' %}">
             <div id="form_container">
@@ -26,7 +26,7 @@
                     {% endfor %}
                     {% endif %}
                     {% endfor %}
-                    <p><input type="submit" id="submit" value="Enviar" class="superbutton"></p>
+                    <p><input type="submit" id="submit" value="{% trans 'Enviar' %}" class="superbutton"></p>
                     <ul id="form_response"><li></li></ul>
                 </div>
             </div>

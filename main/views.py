@@ -470,7 +470,6 @@ def mobile_order(request):
                     request.POST.get('quantity-' + str(i)),
                     request.POST.get('size-' + str(i)),
                 ])
-        #import pdb; pdb.set_trace()
         c = Context({
             'orders': orders,
             'username': request.user.username,
