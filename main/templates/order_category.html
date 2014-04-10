@@ -2,11 +2,15 @@
 {% load i18n %}
 {% block main-content %}
 <div class="container_omega">
+    <a href="{% url 'checkorder' %}">Ver mi pedido</a>&nbsp;|&nbsp;<a href="{% url 'order' %}">Ver categorías</a>
+    <h1>Selecciona un producto</h1>
     {% for product in products %}
         <div class='product-product'>
             <h3>{{ product.model }}</h3>
-            <a href='#'><img src='{{ product.photo.url }}'></a>
+            <a href='{% url 'order_product' product.pk %}'><img src='{{ product.photo.url }}'></a>
         </div>
+    {% empty %}
+    <h3>No hay productos disponibles</h3>
     {% endfor %}
 </div>
 {% endblock main-content %}

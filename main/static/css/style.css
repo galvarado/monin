@@ -2399,9 +2399,34 @@ vertical-align: middle;
 }
 .alert-error{color:red;}
 
-.category-product {
+.category-product, .product-product {
   float: left;
   margin: 10px;
   width:220px;
   height:170px;
+}
+
+.category-product img, .product-product img {
+  width:220px !important;
+  height:170px !important;
+}
+
+.product img {
+  width:440px !important;
+  height:340px !important;
+  float: left;
+  margin: 10px;
+
+}
+.product-details{
+    float:left;
+    width:350px !important;
+    height:170px !important;
+}
+.product-details input {
+    width: 50px;
+}
+.pwm {
+    margin-top:10px;
+
 }

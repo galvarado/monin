@@ -12,6 +12,9 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import AdminPasswordChangeForm
+from django.core.mail import EmailMultiAlternatives
+from django.template import Context
+from django.template.loader import render_to_string
 
 from main.forms import (AccessForm, AuthForm, OrderForm, ClientCreationForm, CategoryCreationForm,
                         ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm,
@@ -180,6 +183,30 @@ def products(request):
 
 @login_required
 @user_passes_test(lambda u: is_client(u))
+def checkorder(request):
+    '''
+    Shows check order page
+    '''
+    message = ''
+    if request.method == 'POST':
+        orders = request.user.orders.all()
+        c = Context({
+            'orders': orders,
+            'username': request.user.username,
+        })
+        text_content = render_to_string('mail/order_from_web.txt', c)
+        html_content = render_to_string('mail/order_from_web.html', c)
+        email = EmailMultiAlternatives(settings.SUBJECT, text_content)
+        email.attach_alternative(html_content, "text/html")
+        email.to = [SiteConfiguration.objects.all().first().email_to_notifications]
+        email.send()
+        message = 'El pedido se ha realizado exitosamente!'
+        for order in orders:
+            order.delete()
+    return render(request, "checkorder.html", {'message': message})
+
+@login_required
+@user_passes_test(lambda u: is_client(u))
 def order(request):
     '''
     Shows order page
@@ -221,12 +248,12 @@ def order_product(request, pk):
     return render(request, "product_order.html", {
         'form': form,
         'form_errors': form_errors,
-        'pk': pk,
+        'product': product,
     })
 
 @login_required
 @user_passes_test(lambda u: is_client(u))
-def order_delete(request,):
+def orders_delete(request,):
     '''
     Delete  order product
     '''
@@ -237,19 +264,14 @@ def order_delete(request,):
 
 @login_required
 @user_passes_test(lambda u: is_client(u))
-def order_do(request,):
+def order_delete(request,):
     '''
-    Do a order product
+    Delete  order product
     '''
-    orders = request.user.orders.all()
-    message = 'Pedido realizado por el cliente con num %s desde  www.monin.com.mx:\n\n' % request.user.username
-    for order in orders:
-        message += 'Modelo:%s Talla:%s  Color:%s Cantidad:%s Precio:%s \n' % (order.product.model, order.size, order.color, order.quantity, order.product.price)
-
-    send_mail(settings.SUBJECT, message, settings.FROM, [SiteConfiguration.objects.all().first().email_to_notifications], fail_silently=False)
-    for order in orders:
-        order.delete()
+    order = request.user.orders.get(pk=request.POST.get('pk'))
+    order.delete()
     return HttpResponse(json.dumps({'response': 1}))
+
 
 @login_required
 def products_all(request):
@@ -352,12 +374,33 @@ def orders_all(request):
 
     count = orders.count()
     for order in orders[start:end]:
+        sizes = ''
+        if order.qty_1:
+            sizes = sizes + 'Talla 1:%s, ' % order.qty_1
+        if order.qty_2:
+            sizes = sizes + 'Talla 2:%s, ' % order.qty_2
+        if order.qty_3:
+            sizes = sizes + 'Talla 3:%s, ' % order.qty_3
+        if order.qty_4:
+            sizes = sizes + 'Talla 4:%s, ' % order.qty_4
+        if order.qty_6:
+            sizes = sizes + 'Talla 6:%s, ' % order.qty_6
+        if order.qty_8:
+            sizes = sizes + 'Talla 8:%s, ' % order.qty_8
+        if order.qty_10:
+            sizes = sizes + 'Talla 10:%s, ' % order.qty_10
+        if order.qty_12:
+            sizes = sizes + 'Talla 12:%s, ' % order.qty_12
+        if order.qty_14:
+            sizes = sizes + 'Talla 14:%s, ' % order.qty_14
+        if order.qty_16:
+            sizes = sizes + 'Talla 16:%s, ' % order.qty_16
         aaData.append([
             order.product.model,
             order.product.price,
             order.color,
-            order.size,
-            order.quantity,
+            sizes,
+            '<button data-id="%s" type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button>' % order.pk,
         ])
 
     data = {
@@ -385,7 +428,6 @@ def contact(request):
             send_mail(settings.SUBJECT, message, settings.FROM, [SiteConfiguration.objects.all().first().email_to_notifications], fail_silently=False)
             info = 'Tu mensaje se ha sido enviado, gracias por contactarnos. Estaremos respondiendo a la brevedad'
     return render(request, "contact.html", {'form': form, 'info': info})
-
 
 # Mobile views
 
@@ -792,7 +834,7 @@ def admin_products_all(request):
         label = 'Desactivar' if product.active else 'Activar   '
         aaData.append([
             product.model,
-            product.category.name,
+            '%s' % product.category.name if product.category else 'No disponible',
             '$%s' % round(product.price, 2),
             'Activo' if product.active else 'Inactivo',
             '<a href="%s"><button type="button" class="btn btn-xs btn-info">Ver foto</button></a>&nbsp;<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/product/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (product.photo.url, product.pk, label, product.pk),
@@ -978,7 +1020,7 @@ def admin_categories_all(request):
         aaData.append([
             category.name,
             'Activo' if category.active else 'Inactivo',
-            '<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/category/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (category.pk, label, category.pk),
+            '<a href="%s"><button type="button" class="btn btn-xs btn-info">Ver foto</button></a>&nbsp;<button type="button" data-id="%s" class="deactivate-button btn btn-xs btn-warning">%s</button>&nbsp;<a href="/admin/category/delete/%s"><button type="button"  class="delete-button btn btn-xs btn-danger">Eliminar</button></a>' % (category.photo.url, category.pk, label, category.pk),
         ])
     data = {
         "iTotalRecords": count,

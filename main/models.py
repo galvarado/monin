@@ -24,6 +24,7 @@ class Product(models.Model):
         return self.model
 
     model = models.CharField(max_length=100, verbose_name='Nombre')
+    description = models.TextField(max_length=500, verbose_name='Descripcion')
     price = models.FloatField(verbose_name='Precio')
     active = models.BooleanField(default=True)
     photo = models.FileField(
@@ -86,17 +87,21 @@ class Order(models.Model):
 
     product = models.ForeignKey(Product, related_name='orders', verbose_name="product")
     client = models.ForeignKey(User, related_name='orders', verbose_name="client")
+    qty_1= models.IntegerField(verbose_name="1", null=True, blank=True)
+    qty_2= models.IntegerField(verbose_name="2", null=True, blank=True)
+    qty_3= models.IntegerField(verbose_name="3", null=True, blank=True)
+    qty_4= models.IntegerField(verbose_name="4", null=True, blank=True)
+    qty_6= models.IntegerField(verbose_name="6", null=True, blank=True)
+    qty_8= models.IntegerField(verbose_name="8", null=True, blank=True)
+    qty_10= models.IntegerField(verbose_name="10", null=True, blank=True)
+    qty_12= models.IntegerField(verbose_name="12", null=True, blank=True)
+    qty_14= models.IntegerField(verbose_name="14", null=True, blank=True)
+    qty_16= models.IntegerField(verbose_name="16", null=True, blank=True)
     color = models.CharField(
         max_length=50,
         choices=settings.COLORS,
         verbose_name="Color"
     )
-    size = models.CharField(
-        max_length=2,
-        choices=settings.SIZES,
-        verbose_name="Talla"
-    )
-    quantity = models.CharField(max_length=10, verbose_name="Cantidad")
 
 class SiteConfiguration(models.Model):
     '''

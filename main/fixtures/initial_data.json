@@ -378,6 +378,60 @@
  }
 },
 {
+ "pk": 43, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "add_category", 
+  "name": "Can add category", 
+  "content_type": 14
+ }
+},
+{
+ "pk": 44, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "change_category", 
+  "name": "Can change category", 
+  "content_type": 14
+ }
+},
+{
+ "pk": 45, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "delete_category", 
+  "name": "Can delete category", 
+  "content_type": 14
+ }
+},
+{
+ "pk": 46, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "add_imageslider", 
+  "name": "Can add image slider", 
+  "content_type": 15
+ }
+},
+{
+ "pk": 47, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "change_imageslider", 
+  "name": "Can change image slider", 
+  "content_type": 15
+ }
+},
+{
+ "pk": 48, 
+ "model": "auth.permission", 
+ "fields": {
+  "codename": "delete_imageslider", 
+  "name": "Can delete image slider", 
+  "content_type": 15
+ }
+},
+{
  "pk": 1, 
  "model": "auth.group", 
  "fields": {
@@ -429,7 +483,7 @@
   "is_active": true, 
   "is_superuser": false, 
   "is_staff": false, 
-  "last_login": "2014-03-06T23:37:40Z", 
+  "last_login": "2014-04-10T00:12:42Z", 
   "groups": [
    2
   ], 
@@ -480,6 +534,97 @@
  }
 },
 {
+ "pk": 1, 
+ "model": "main.category", 
+ "fields": {
+  "active": true, 
+  "photo": "main/static/media/photos/client_brief_5.jpg", 
+  "name": "Categoria1"
+ }
+},
+{
+ "pk": 2, 
+ "model": "main.category", 
+ "fields": {
+  "active": true, 
+  "photo": "main/static/media/photos/busy_5.jpg", 
+  "name": "Categoria2"
+ }
+},
+{
+ "pk": 3, 
+ "model": "main.category", 
+ "fields": {
+  "active": true, 
+  "photo": "main/static/media/photos/busy_6.jpg", 
+  "name": "Categoria3"
+ }
+},
+{
+ "pk": 1, 
+ "model": "main.product", 
+ "fields": {
+  "category": 2, 
+  "description": "Esta es una descripcion de ejemplo", 
+  "photo": "main/static/media/photos/client_brief_3.jpg", 
+  "price": 100.0, 
+  "active": true, 
+  "model": "Modelo1"
+ }
+},
+{
+ "pk": 3, 
+ "model": "main.product", 
+ "fields": {
+  "category": 1, 
+  "description": "Esta es una descripcion de ejemplo", 
+  "photo": "main/static/media/photos/busy_3.jpg", 
+  "price": 10.0, 
+  "active": true, 
+  "model": "otro"
+ }
+},
+{
+ "pk": 2, 
+ "model": "main.imageslider", 
+ "fields": {
+  "active": true, 
+  "photo": "main/static/media/photos/slide2.png", 
+  "category": "1", 
+  "name": "slider2"
+ }
+},
+{
+ "pk": 3, 
+ "model": "main.imageslider", 
+ "fields": {
+  "active": true, 
+  "photo": "main/static/media/photos/slide3.jpg", 
+  "category": "1", 
+  "name": "slider3"
+ }
+},
+{
+ "pk": 4, 
+ "model": "main.imageslider", 
+ "fields": {
+  "active": true, 
+  "photo": "main/static/media/photos/busy_4.jpg", 
+  "category": "2", 
+  "name": "slider productos"
+ }
+},
+{
+ "pk": 5, 
+ "model": "main.imageslider", 
+ "fields": {
+  "active": true, 
+  "photo": "main/static/media/photos/client_brief_4.jpg", 
+  "category": "2", 
+  "name": "slider productos 2"
+ }
+},
+{
  "pk": 2, 
  "model": "main.categorysample", 
  "fields": {
@@ -493,6 +638,55 @@
  "fields": {
   "active": true, 
   "name": "Trajecitos"
+ }
+},
+{
+ "pk": 2, 
+ "model": "main.productsample", 
+ "fields": {
+  "active": true, 
+  "category": 2, 
+  "name": "test", 
+  "photo": "main/static/media/photos/busy.jpg"
+ }
+},
+{
+ "pk": 3, 
+ "model": "main.productsample", 
+ "fields": {
+  "active": true, 
+  "category": 3, 
+  "name": "test2", 
+  "photo": "main/static/media/photos/client_brief_1.jpg"
+ }
+},
+{
+ "pk": 4, 
+ "model": "main.productsample", 
+ "fields": {
+  "active": true, 
+  "category": 2, 
+  "name": "d", 
+  "photo": "main/static/media/photos/busy_1.jpg"
+ }
+},
+{
+ "pk": 5, 
+ "model": "main.productsample", 
+ "fields": {
+  "active": true, 
+  "category": 3, 
+  "name": "e", 
+  "photo": "main/static/media/photos/client_brief_2.jpg"
+ }
+},
+{
+ "pk": 1, 
+ "model": "main.siteconfiguration", 
+ "fields": {
+  "active_background": false, 
+  "background": "", 
+  "email_to_notifications": "guillermoalvarado89@gmail.com"
  }
 },
 {
@@ -547,6 +741,69 @@
   "applied": "2014-03-07T18:31:04Z", 
   "app_name": "main", 
   "migration": "0006_auto__add_field_siteconfiguration_email_to_notifications"
+ }
+},
+{
+ "pk": 7, 
+ "model": "south.migrationhistory", 
+ "fields": {
+  "applied": "2014-03-07T18:45:29Z", 
+  "app_name": "main", 
+  "migration": "0007_auto__chg_field_productsample_photo__chg_field_product_photo"
+ }
+},
+{
+ "pk": 8, 
+ "model": "south.migrationhistory", 
+ "fields": {
+  "applied": "2014-03-07T18:58:04Z", 
+  "app_name": "main", 
+  "migration": "0008_auto__chg_field_productsample_photo__chg_field_product_photo"
+ }
+},
+{
+ "pk": 9, 
+ "model": "south.migrationhistory", 
+ "fields": {
+  "applied": "2014-04-05T00:18:01Z", 
+  "app_name": "main", 
+  "migration": "0009_auto__add_category__add_imageslider__add_field_product_category"
+ }
+},
+{
+ "pk": 10, 
+ "model": "south.migrationhistory", 
+ "fields": {
+  "applied": "2014-04-08T17:48:10Z", 
+  "app_name": "main", 
+  "migration": "0010_auto__chg_field_siteconfiguration_background__chg_field_siteconfigurat"
+ }
+},
+{
+ "pk": 11, 
+ "model": "south.migrationhistory", 
+ "fields": {
+  "applied": "2014-04-09T21:13:48Z", 
+  "app_name": "main", 
+  "migration": "0011_auto__add_field_product_description"
+ }
+},
+{
+ "pk": 12, 
+ "model": "south.migrationhistory", 
+ "fields": {
+  "applied": "2014-04-09T21:30:06Z", 
+  "app_name": "main", 
+  "migration": "0012_auto__del_field_order_size__del_field_order_quantity__add_field_order_"
+ }
+},
+{
+ "pk": 13, 
+ "model": "south.migrationhistory", 
+ "fields": {
+  "applied": "2014-04-09T22:20:32Z", 
+  "app_name": "main", 
+  "migration": "0013_auto__chg_field_order_qty_4__chg_field_order_qty_1__chg_field_order_qt"
  }
 },
 {
@@ -675,6 +932,84 @@
   "object_repr": "Modelo2", 
   "object_id": "2", 
   "change_message": "Modificado/a photo.", 
+  "user": 1, 
+  "content_type": 9
+ }
+},
+{
+ "pk": 11, 
+ "model": "admin.logentry", 
+ "fields": {
+  "action_flag": 1, 
+  "action_time": "2014-04-09T19:40:41Z", 
+  "object_repr": "Categoria1", 
+  "object_id": "1", 
+  "change_message": "", 
+  "user": 1, 
+  "content_type": 14
+ }
+},
+{
+ "pk": 12, 
+ "model": "admin.logentry", 
+ "fields": {
+  "action_flag": 1, 
+  "action_time": "2014-04-09T19:40:53Z", 
+  "object_repr": "Categoria2", 
+  "object_id": "2", 
+  "change_message": "", 
+  "user": 1, 
+  "content_type": 14
+ }
+},
+{
+ "pk": 13, 
+ "model": "admin.logentry", 
+ "fields": {
+  "action_flag": 2, 
+  "action_time": "2014-04-09T19:42:27Z", 
+  "object_repr": "otro", 
+  "object_id": "3", 
+  "change_message": "Changed category.", 
+  "user": 1, 
+  "content_type": 9
+ }
+},
+{
+ "pk": 14, 
+ "model": "admin.logentry", 
+ "fields": {
+  "action_flag": 2, 
+  "action_time": "2014-04-09T19:42:32Z", 
+  "object_repr": "Modelo1", 
+  "object_id": "1", 
+  "change_message": "Changed category.", 
+  "user": 1, 
+  "content_type": 9
+ }
+},
+{
+ "pk": 15, 
+ "model": "admin.logentry", 
+ "fields": {
+  "action_flag": 2, 
+  "action_time": "2014-04-09T21:16:52Z", 
+  "object_repr": "otro", 
+  "object_id": "3", 
+  "change_message": "Changed description.", 
+  "user": 1, 
+  "content_type": 9
+ }
+},
+{
+ "pk": 16, 
+ "model": "admin.logentry", 
+ "fields": {
+  "action_flag": 2, 
+  "action_time": "2014-04-09T21:17:02Z", 
+  "object_repr": "Modelo1", 
+  "object_id": "1", 
+  "change_message": "Changed description.", 
   "user": 1, 
   "content_type": 9
  }
