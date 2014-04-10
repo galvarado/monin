@@ -190,19 +190,22 @@ def checkorder(request):
     message = ''
     if request.method == 'POST':
         orders = request.user.orders.all()
-        c = Context({
-            'orders': orders,
-            'username': request.user.username,
-        })
-        text_content = render_to_string('mail/order_from_web.txt', c)
-        html_content = render_to_string('mail/order_from_web.html', c)
-        email = EmailMultiAlternatives(settings.SUBJECT, text_content)
-        email.attach_alternative(html_content, "text/html")
-        email.to = [SiteConfiguration.objects.all().first().email_to_notifications]
-        email.send()
-        message = 'El pedido se ha realizado exitosamente!'
-        for order in orders:
-            order.delete()
+        if orders:
+            c = Context({
+                'orders': orders,
+                'username': request.user.username,
+            })
+            text_content = render_to_string('mail/order_from_web.txt', c)
+            html_content = render_to_string('mail/order_from_web.html', c)
+            email = EmailMultiAlternatives(settings.SUBJECT, text_content)
+            email.attach_alternative(html_content, "text/html")
+            email.to = [SiteConfiguration.objects.all().first().email_to_notifications]
+            email.send()
+            message = 'El pedido se ha realizado exitosamente!'
+            for order in orders:
+                order.delete()
+        else:
+            message = 'No se puede enviar un pedido vacio'
     return render(request, "checkorder.html", {'message': message})
 
 @login_required

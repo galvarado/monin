@@ -17,8 +17,8 @@
   </tr>
   {% for order in orders %}
   <tr>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.model }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.Color }}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.product.model }}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.product.color }}</td>
     <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_1 %}{{ order.qty_1 }}{% else %}-{% endif %}</td>
     <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_2 %}{{ order.qty_2 }}{% else %}-{% endif %}</td>
     <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_3 %}{{ order.qty_3 }}{% else %}-{% endif %}</td>
