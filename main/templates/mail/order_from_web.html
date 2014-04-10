@@ -1,4 +1,4 @@
-<h1>Pedido realizado por el cliente con num {{ username }} desde  www.monin.com.mx'</h1>
+<h3>Pedido realizado por el cliente con num {{ username }} desde  www.monin.com.mx'</h3>
 
 <table class="tg" style="border-collapse: collapse;border-spacing: 0;border-color: #aabcfe;">
   <tr>
@@ -19,16 +19,15 @@
   <tr>
     <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.model }}</td>
     <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.Color }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.qty_1 }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.qty_2 }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.qty_3 }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.qty_4 }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.qty_6 }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.qty_8 }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.qty_10 }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.qty_12 }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.qty_14 }}</td>
-    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{{ order.qty_16 }}</td>
-  </tr>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_1 %}{{ order.qty_1 }}{% else %}-{% endif %}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_2 %}{{ order.qty_2 }}{% else %}-{% endif %}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_3 %}{{ order.qty_3 }}{% else %}-{% endif %}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_4 %}{{ order.qty_4 }}{% else %}-{% endif %}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_6 %}{{ order.qty_6 }}{% else %}-{% endif %}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_8 %}{{ order.qty_8 }}{% else %}-{% endif %}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_10 %}{{ order.qty_10 }}{% else %}-{% endif %}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_12 %}{{ order.qty_12 }}{% else %}-{% endif %}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_14 %}{{ order.qty_14 }}{% else %}-{% endif %}</td>
+    <td class="tg-031e" style="font-family: Arial, sans-serif;font-size: 14px;padding: 10px 5px;border-style: solid;border-width: 1px;overflow: hidden;word-break: normal;border-color: #aabcfe;color: #669;background-color: #e8edff;">{% if order.qty_16 %}{{ order.qty_16 }}{% else %}-{% endif %}</td>
   {% endfor %}
 </table>
