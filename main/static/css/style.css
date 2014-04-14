@@ -2412,12 +2412,13 @@ vertical-align: middle;
 }
 
 .product img {
-  width:440px !important;
-  height:340px !important;
+  width:340px !important;
+  height:240px !important;
   float: left;
   margin: 10px;
-
+  margin-right: 70px;
 }
+
 .product-details{
     float:left;
     width:350px !important;

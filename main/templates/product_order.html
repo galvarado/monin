@@ -5,7 +5,7 @@
     <a href="{% url 'checkorder' %}">Ver mi pedido</a>&nbsp;|&nbsp;<a href="{% url 'order' %}">Ver categorías</a>|&nbsp;<a href="#" onClick="javascript:history.go(-1); return false;">Regresar</a>
     <h3>{{ product.model }}</h3>
     <div class="product">
-        <img src="{{ product.photo.url }}"/>
+        <a class="img-colorbox" href="{{ product.photo.url}}"><img id="thumb" src="{{ product.photo.url }}"></a>
         <div class="product-details">
             <h3>Detalles</h3>
             <label>Precio:</label><span>{{ product.price | currency }}</span><br />
@@ -41,5 +41,8 @@
 {% block js %}
 {{ block.super }}
 <script>
+$(document).ready(function(){
+    $('.img-colorbox').colorbox({ opacity:0.5 });
+});
 </script>
 {% endblock js %}
