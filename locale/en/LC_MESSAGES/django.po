@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-15 17:05-0500\n"
+"POT-Creation-Date: 2014-04-15 17:15-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Guillermo <galvarado@kionetworks.com>\n"
 "Language-Team: \n"
@@ -39,7 +39,7 @@ msgid "Descripcion"
 msgstr "Description"
 
 #: main/models.py:29
-#: main/templates/checkorder.html:32
+#: main/templates/checkorder.html:34
 #: main/templates/product_order.html:11
 msgid "Precio"
 msgstr "Price"
@@ -65,6 +65,18 @@ msgstr ""
 #: main/models.py:118
 msgid "Correo de notificaciones"
 msgstr ""
+
+#: main/views.py:204
+msgid "El pedido se ha realizado exitosamente!"
+msgstr "The order was sent successfully"
+
+#: main/views.py:208
+msgid "No se puede enviar un pedido vacio"
+msgstr "Can not send an empty order"
+
+#: main/views.py:432
+msgid "Tu mensaje se ha sido enviado, gracias por contactarnos. Estaremos respondiendo a la brevedad"
+msgstr "Your message has been sent, Thanks to  contact us. We will respond imediately"
 
 #: main/templates/access.html:6
 msgid "Nuestros Productos"
@@ -109,37 +121,37 @@ msgstr "Client access"
 msgid "Contacto"
 msgstr "Contact"
 
-#: main/templates/checkorder.html:5
+#: main/templates/checkorder.html:7
 msgid "Pedido actual"
 msgstr "Actual order"
 
-#: main/templates/checkorder.html:6
+#: main/templates/checkorder.html:8
 #: main/templates/order_category.html:5
 #: main/templates/product_order.html:5
 msgid "Ver categorías"
 msgstr "See categories"
 
-#: main/templates/checkorder.html:18
+#: main/templates/checkorder.html:20
 msgid "Mandar pedido"
 msgstr "Send my order"
 
-#: main/templates/checkorder.html:20
+#: main/templates/checkorder.html:22
 msgid "Eliminar pedido"
 msgstr "Delete my order"
 
-#: main/templates/checkorder.html:31
+#: main/templates/checkorder.html:33
 msgid "Modelo"
 msgstr "Model"
 
-#: main/templates/checkorder.html:33
+#: main/templates/checkorder.html:35
 msgid "Color"
 msgstr "Color"
 
-#: main/templates/checkorder.html:34
+#: main/templates/checkorder.html:36
 msgid "Tallas"
 msgstr "Size"
 
-#: main/templates/checkorder.html:35
+#: main/templates/checkorder.html:37
 msgid "Accion"
 msgstr "Action"
 

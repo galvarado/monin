@@ -201,11 +201,11 @@ def checkorder(request):
             email.attach_alternative(html_content, "text/html")
             email.to = [SiteConfiguration.objects.all().first().email_to_notifications]
             email.send()
-            message = 'El pedido se ha realizado exitosamente!'
+            message = _('El pedido se ha realizado exitosamente!')
             for order in orders:
                 order.delete()
         else:
-            message = 'No se puede enviar un pedido vacio'
+            message = _('No se puede enviar un pedido vacio')
     return render(request, "checkorder.html", {'message': message})
 
 @login_required
@@ -429,7 +429,7 @@ def contact(request):
                 form.cleaned_data.get('message')
             )
             send_mail(settings.SUBJECT, message, settings.FROM, [SiteConfiguration.objects.all().first().email_to_notifications], fail_silently=False)
-            info = 'Tu mensaje se ha sido enviado, gracias por contactarnos. Estaremos respondiendo a la brevedad'
+            info = _('Tu mensaje se ha sido enviado, gracias por contactarnos. Estaremos respondiendo a la brevedad')
     return render(request, "contact.html", {'form': form, 'info': info})
 
 # Mobile views
