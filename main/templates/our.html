@@ -1,2 +1,32 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% block main-content %}
+<div class="container_omega">
+    <div class="gs_11 our">
+        <h2>{% trans 'Nosotros' %}</h2>
+        <p>{% blocktrans %}
+            Monin, es una empresa con una larga tradición en la confección textil para niño con 20 años en el mercado, especializada en la ropa de ceremonia infantil, con presencia a nivel nacional e internacional. Siempre estamos comprometidos con la creación de una variada colección de prendas infantiles con estilo propio.
+            {% endblocktrans %}
+        </p>
+        <p>{% blocktrans %}
+            <b>La calidad y distinción de nuestras confecciones no es un argumento, es una realidad</b> que se percibe en cada una de nuestras prendas.La estética, calidad y comodidad de los Niños que visten nuestras prendas son el resultado de nuestro trabajo.
+            {% endblocktrans %}
+        </p>
+        <h2>{% trans 'Visión' %}</h2>
+        <p>{% blocktrans %}
+            Ser una empresa reconocida por su excelencia y calidad en la fabricación y 
+            comercialización de ropa de ceremonia infantil con diseños de moda y tradición, 
+            cumpliendo con las expectativas de servicio y tiempos de entrega. Profesionalizando 
+            nuestro personal e incorporando nuevas tecnologías para lograr la apertura de nuevos
+            mercados.
+            {% endblocktrans %}
+        </p>
+        <h2>{% trans 'Misión' %}</h2>
+        <p>{% blocktrans %}
+            Somos una empresa Mexicana que busca atender las necesidades de moda en 
+            ceremonia infantil creando para nuestros clientes productos con diseño, calidad y precio accesible. Brindando a nuestros accionistas una rentabilidad creciente y sostenible y a nuestros colaboradores la posibilidad de desarrollarse en su área laboral.
+            {% endblocktrans %}
+        </p>
+    </div>
+</div>
+{% endblock main-content %}

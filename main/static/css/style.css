@@ -2429,5 +2429,8 @@ vertical-align: middle;
 }
 .pwm {
     margin-top:10px;
+}
 
+.our p {
+    width: 100%;
 }
