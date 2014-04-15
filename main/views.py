@@ -15,6 +15,7 @@ from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.core.mail import EmailMultiAlternatives
 from django.template import Context
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext as _
 
 from main.forms import (AccessForm, AuthForm, OrderForm, ClientCreationForm, CategoryCreationForm,
                         ProductCreationForm, ProductSampleCreationForm, SiteConfigurationForm,
