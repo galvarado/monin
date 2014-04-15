@@ -2,15 +2,15 @@
 {% load i18n custom_tags %}
 {% block main-content %}
 <div class="container_omega">
-    <a href="{% url 'checkorder' %}">Ver mi pedido</a>&nbsp;|&nbsp;<a href="{% url 'order' %}">Ver categorías</a>|&nbsp;<a href="#" onClick="javascript:history.go(-1); return false;">Regresar</a>
+    <a href="{% url 'checkorder' %}">{% trans 'Ver mi pedido' %}</a>&nbsp;|&nbsp;<a href="{% url 'order' %}">{% trans 'Ver categorías' %}</a>|&nbsp;<a href="#" onClick="javascript:history.go(-1); return false;">{% trans 'Regresar' %}</a>
     <h3>{{ product.model }}</h3>
     <div class="product">
         <a class="img-colorbox" href="{{ product.photo.url}}"><img id="thumb" src="{{ product.photo.url }}"></a>
         <div class="product-details">
-            <h3>Detalles</h3>
-            <label>Precio:</label><span>{{ product.price | currency }}</span><br />
-            <label>Descripcion:</label><span>{{ product.description }}</span>
-            <h3>Introduce el pedido</h3>
+            <h3>{% trans 'Detalles' %}</h3>
+            <label>{% trans 'Precio' %}:</label><span>{{ product.price | currency }}</span><br />
+            <label>{% trans 'Descripcion' %}:</label><span>{{ product.description }}</span>
+            <h3>{% trans 'Introduce el pedido' %}</h3>
             <form method="post" action="{% url 'order_product' product.pk %}">
                 <div id="form_container">
                     <div id="form_main">
@@ -29,7 +29,7 @@
                         <p class="error">{{ error }}</p>
                         {% endfor %}
                         <br />
-                        <p class="pwm"><input type="submit" id="submit" value="Agregar" class="superbutton"></p>
+                        <p class="pwm"><input type="submit" id="submit" value="{% trans 'Agregar' %}" class="superbutton"></p>
                         <ul id="form_response"><li></li></ul>
                     </div>
                 </div>

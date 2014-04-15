@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 class Category(models.Model):
     '''
@@ -9,7 +10,7 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
-    name = models.CharField(max_length=100, verbose_name='Nombre')
+    name = models.CharField(max_length=100, verbose_name=_('Nombre'))
     active = models.BooleanField(default=True)
     photo = models.FileField(
         upload_to='main/static/media/photos',
@@ -23,15 +24,15 @@ class Product(models.Model):
     def __unicode__(self):
         return self.model
 
-    model = models.CharField(max_length=100, verbose_name='Nombre')
-    description = models.TextField(max_length=500, verbose_name='Descripcion')
-    price = models.FloatField(verbose_name='Precio')
+    model = models.CharField(max_length=100, verbose_name=_('Nombre'))
+    description = models.TextField(max_length=500, verbose_name=_('Descripcion'))
+    price = models.FloatField(verbose_name=_('Precio'))
     active = models.BooleanField(default=True)
     photo = models.FileField(
         upload_to='main/static/media/photos',
         verbose_name="Foto",
     )
-    category = models.ForeignKey(Category, related_name='products', verbose_name="Categoria")
+    category = models.ForeignKey(Category, related_name='products', verbose_name=_("Categoria"))
 
 
 class ImageSlider(models.Model):
@@ -44,13 +45,13 @@ class ImageSlider(models.Model):
         ('1', 'Slider principal'),
         ('2', 'Slider productos'),
     )
-    name = models.CharField(max_length=100, verbose_name='Nombre')
+    name = models.CharField(max_length=100, verbose_name=_('Nombre'))
     active = models.BooleanField(default=True)
     photo = models.FileField(
         upload_to='main/static/media/photos',
         verbose_name="Foto",
     )
-    category = models.CharField(max_length=1, verbose_name='Categoria', choices=CATEGORY_CHOICES, default='1')
+    category = models.CharField(max_length=1, verbose_name=_('Categoria'), choices=CATEGORY_CHOICES, default='1')
 
 class CategorySample(models.Model):
     '''
@@ -59,7 +60,7 @@ class CategorySample(models.Model):
     def __unicode__(self):
         return self.name
 
-    name = models.CharField(max_length=100, verbose_name='Nombre')
+    name = models.CharField(max_length=100, verbose_name=_('Nombre'))
     active = models.BooleanField(default=True)
 
 
@@ -70,9 +71,9 @@ class ProductSample(models.Model):
     def __unicode__(self):
         return self.name
 
-    name = models.CharField(max_length=100, verbose_name='Nombre')
+    name = models.CharField(max_length=100, verbose_name=_('Nombre'))
     active = models.BooleanField(default=True)
-    category = models.ForeignKey(CategorySample, related_name='products_sample', verbose_name="Categoria")
+    category = models.ForeignKey(CategorySample, related_name='products_sample', verbose_name=_("Categoria"))
     photo = models.FileField(
         upload_to='main/static/media/photos',
         verbose_name="Foto",
@@ -85,8 +86,8 @@ class Order(models.Model):
     def __unicode__(self):
         return self.product.model
 
-    product = models.ForeignKey(Product, related_name='orders', verbose_name="product")
-    client = models.ForeignKey(User, related_name='orders', verbose_name="client")
+    product = models.ForeignKey(Product, related_name='orders', verbose_name=_("product"))
+    client = models.ForeignKey(User, related_name='orders', verbose_name=_("client"))
     qty_1= models.IntegerField(verbose_name="1", null=True, blank=True)
     qty_2= models.IntegerField(verbose_name="2", null=True, blank=True)
     qty_3= models.IntegerField(verbose_name="3", null=True, blank=True)
@@ -113,5 +114,5 @@ class SiteConfiguration(models.Model):
         null=True,
         blank=True,
     )
-    active_background = models.BooleanField(default=False, verbose_name="Activar fondo")
-    email_to_notifications = models.EmailField(verbose_name="Correo de notificaciones", null=True, blank=True)
+    active_background = models.BooleanField(default=False, verbose_name=_("Activar fondo"))
+    email_to_notifications = models.EmailField(verbose_name=_("Correo de notificaciones"), null=True, blank=True)

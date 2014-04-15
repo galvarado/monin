@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-15 16:35-0500\n"
+"POT-Creation-Date: 2014-04-15 17:05-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Guillermo <galvarado@kionetworks.com>\n"
 "Language-Team: \n"
@@ -15,7 +15,13 @@ msgstr ""
 msgid "Numero de cliente"
 msgstr "Client number"
 
-#: main/forms.py:15 main/forms.py:57
+#: main/forms.py:15
+#: main/forms.py:57
+#: main/models.py:13
+#: main/models.py:27
+#: main/models.py:48
+#: main/models.py:63
+#: main/models.py:74
 msgid "Nombre"
 msgstr "Name"
 
@@ -27,39 +33,57 @@ msgstr "City"
 msgid "Mensaje"
 msgstr "Message"
 
+#: main/models.py:28
+#: main/templates/product_order.html:12
+msgid "Descripcion"
+msgstr "Description"
+
+#: main/models.py:29
+#: main/templates/checkorder.html:32
+#: main/templates/product_order.html:11
+msgid "Precio"
+msgstr "Price"
+
+#: main/models.py:35
+#: main/models.py:54
+#: main/models.py:76
+msgid "Categoria"
+msgstr "Category"
+
+#: main/models.py:89
+msgid "product"
+msgstr "Products"
+
+#: main/models.py:90
+msgid "client"
+msgstr "client"
+
+#: main/models.py:117
+msgid "Activar fondo"
+msgstr ""
+
+#: main/models.py:118
+msgid "Correo de notificaciones"
+msgstr ""
+
 #: main/templates/access.html:6
 msgid "Nuestros Productos"
 msgstr "Products"
 
 #: main/templates/access.html:8
-msgid ""
-"En Monin, nuestros diseñadores abordan el proceso creativo manejando la "
-"mayor cantidad posible de información del panorama de tendencias, para poder "
-"así ofrecer en nuestras colecciones de temporada una gran variedad de "
-"estilos, pero nunca dejándonos llevar por los excesos."
-msgstr ""
-"In Monin, our designers approach the creative process handling the largest "
-"possible amount of information on trends overview, in order to offer our "
-"seasonal collections in a variety of styles, but never getting carried away "
-"by the excesses."
+msgid "En Monin, nuestros diseñadores abordan el proceso creativo manejando la mayor cantidad posible de información del panorama de tendencias, para poder así ofrecer en nuestras colecciones de temporada una gran variedad de estilos, pero nunca dejándonos llevar por los excesos."
+msgstr "In Monin, our designers approach the creative process handling the largest possible amount of information on trends overview, in order to offer our seasonal collections in a variety of styles, but never getting carried away by the excesses."
 
 #: main/templates/access.html:11
-msgid ""
-"Actualmente contamos con un amplio surtido en ropa de ceremonia infantil "
-"fabricando las líneas de BAUTIZO COMUNION y PRESENTACION con gran variedad "
-"de modelos en cada una. Nuestros productos van desde la talla 6 meses hasta "
-"la talla 18-20. CONOCENOS!"
-msgstr ""
-"We currently have a wide assortment of infant clothing manufacturing lines "
-"ceremony CHRISTENING COMMUNION and PRESENTATION with a variety of models in "
-"each. Our products range from size 6 months to size 18-20. MEET US!"
+msgid "Actualmente contamos con un amplio surtido en ropa de ceremonia infantil fabricando las líneas de BAUTIZO COMUNION y PRESENTACION con gran variedad de modelos en cada una. Nuestros productos van desde la talla 6 meses hasta la talla 18-20. CONOCENOS!"
+msgstr "We currently have a wide assortment of infant clothing manufacturing lines ceremony CHRISTENING COMMUNION and PRESENTATION with a variety of models in each. Our products range from size 6 months to size 18-20. MEET US!"
 
 #: main/templates/access.html:22
-msgid ""
-"Proporciona los siguientes datos para ver el catalogo completo de inmediato"
+msgid "Proporciona los siguientes datos para ver el catalogo completo de inmediato"
 msgstr "Provide the data below to access full catalog"
 
-#: main/templates/access.html:37 main/templates/clients.html:23
+#: main/templates/access.html:37
+#: main/templates/clients.html:23
 #: main/templates/contact.html:26
 msgid "Enviar"
 msgstr "Send"
@@ -68,7 +92,8 @@ msgstr "Send"
 msgid "Inicio"
 msgstr "Home"
 
-#: main/templates/base.html:53 main/templates/our.html:6
+#: main/templates/base.html:53
+#: main/templates/our.html:6
 msgid "Nosotros"
 msgstr "Our"
 
@@ -84,6 +109,40 @@ msgstr "Client access"
 msgid "Contacto"
 msgstr "Contact"
 
+#: main/templates/checkorder.html:5
+msgid "Pedido actual"
+msgstr "Actual order"
+
+#: main/templates/checkorder.html:6
+#: main/templates/order_category.html:5
+#: main/templates/product_order.html:5
+msgid "Ver categorías"
+msgstr "See categories"
+
+#: main/templates/checkorder.html:18
+msgid "Mandar pedido"
+msgstr "Send my order"
+
+#: main/templates/checkorder.html:20
+msgid "Eliminar pedido"
+msgstr "Delete my order"
+
+#: main/templates/checkorder.html:31
+msgid "Modelo"
+msgstr "Model"
+
+#: main/templates/checkorder.html:33
+msgid "Color"
+msgstr "Color"
+
+#: main/templates/checkorder.html:34
+msgid "Tallas"
+msgstr "Size"
+
+#: main/templates/checkorder.html:35
+msgid "Accion"
+msgstr "Action"
+
 #: main/templates/clients.html:5
 msgid "Bienvenido, ingresa tus datos para poder continuar"
 msgstr "Welcome, provide your data to continue"
@@ -92,35 +151,45 @@ msgstr "Welcome, provide your data to continue"
 msgid "Mandanos un mensaje, a continuacion completa los datos"
 msgstr "Send us a message, complete the data below"
 
+#: main/templates/order.html:5
+#: main/templates/order_category.html:5
+#: main/templates/product_order.html:5
+msgid "Ver mi pedido"
+msgstr "See my order"
+
+#: main/templates/order.html:6
+msgid "Selecciona la categoria"
+msgstr "Select a category"
+
+#: main/templates/order.html:13
+msgid "No hay categorias disponibles"
+msgstr "Empty cateogories"
+
+#: main/templates/order_category.html:6
+msgid "Selecciona un producto"
+msgstr "Select a product"
+
+#: main/templates/order_category.html:13
+msgid "No hay productos disponibles"
+msgstr "Empty products"
+
 #: main/templates/our.html:7
 msgid ""
 "\n"
-"            Monin, es una empresa con una larga tradición en la confección "
-"textil para niño con 20 años en el mercado, especializada en la ropa de "
-"ceremonia infantil, con presencia a nivel nacional e internacional. Siempre "
-"estamos comprometidos con la creación de una variada colección de prendas "
-"infantiles con estilo propio.\n"
+"            Monin, es una empresa con una larga tradición en la confección textil para niño con 20 años en el mercado, especializada en la ropa de ceremonia infantil, con presencia a nivel nacional e internacional. Siempre estamos comprometidos con la creación de una variada colección de prendas infantiles con estilo propio.\n"
 "            "
 msgstr ""
 "\n"
-"Monin, is a company with a long tradition of weaving cloth for boy with 20 "
-"years in business, specializing in children's clothing ceremony, with "
-"presence at national and international level. We are always committed to "
-"creating a diverse collection of children's clothing with style."
+"Monin, is a company with a long tradition of weaving cloth for boy with 20 years in business, specializing in children's clothing ceremony, with presence at national and international level. We are always committed to creating a diverse collection of children's clothing with style."
 
 #: main/templates/our.html:11
 msgid ""
 "\n"
-"            <b>La calidad y distinción de nuestras confecciones no es un "
-"argumento, es una realidad</b> que se percibe en cada una de nuestras "
-"prendas.La estética, calidad y comodidad de los Niños que visten nuestras "
-"prendas son el resultado de nuestro trabajo.\n"
+"            <b>La calidad y distinción de nuestras confecciones no es un argumento, es una realidad</b> que se percibe en cada una de nuestras prendas.La estética, calidad y comodidad de los Niños que visten nuestras prendas son el resultado de nuestro trabajo.\n"
 "            "
 msgstr ""
 "\n"
-"Quality and distinction of our clothing is not an argument, it is a reality "
-"that is perceived in each of our prendas.La aesthetics, quality and comfort "
-"of the children who wear our garments are the result of our work."
+"Quality and distinction of our clothing is not an argument, it is a reality that is perceived in each of our prendas.La aesthetics, quality and comfort of the children who wear our garments are the result of our work."
 
 #: main/templates/our.html:15
 msgid "Visión"
@@ -129,22 +198,15 @@ msgstr "Vision"
 #: main/templates/our.html:16
 msgid ""
 "\n"
-"            Ser una empresa reconocida por su excelencia y calidad en la "
-"fabricación y \n"
-"            comercialización de ropa de ceremonia infantil con diseños de "
-"moda y tradición, \n"
-"            cumpliendo con las expectativas de servicio y tiempos de "
-"entrega. Profesionalizando \n"
-"            nuestro personal e incorporando nuevas tecnologías para lograr "
-"la apertura de nuevos\n"
+"            Ser una empresa reconocida por su excelencia y calidad en la fabricación y \n"
+"            comercialización de ropa de ceremonia infantil con diseños de moda y tradición, \n"
+"            cumpliendo con las expectativas de servicio y tiempos de entrega. Profesionalizando \n"
+"            nuestro personal e incorporando nuevas tecnologías para lograr la apertura de nuevos\n"
 "            mercados.\n"
 "            "
 msgstr ""
 "\n"
-"Being recognized for excellence and quality in manufacturing and marketing "
-"of children's clothing with trendy designs ceremony and tradition, meeting "
-"the expectations of service and delivery times. Professionalizing our staff "
-"and incorporating new technologies to achieve the opening of new markets."
+"Being recognized for excellence and quality in manufacturing and marketing of children's clothing with trendy designs ceremony and tradition, meeting the expectations of service and delivery times. Professionalizing our staff and incorporating new technologies to achieve the opening of new markets."
 
 #: main/templates/our.html:24
 msgid "Misión"
@@ -153,19 +215,28 @@ msgstr "Mission"
 #: main/templates/our.html:25
 msgid ""
 "\n"
-"            Somos una empresa Mexicana que busca atender las necesidades de "
-"moda en \n"
-"            ceremonia infantil creando para nuestros clientes productos con "
-"diseño, calidad y precio accesible. Brindando a nuestros accionistas una "
-"rentabilidad creciente y sostenible y a nuestros colaboradores la "
-"posibilidad de desarrollarse en su área laboral.\n"
+"            Somos una empresa Mexicana que busca atender las necesidades de moda en \n"
+"            ceremonia infantil creando para nuestros clientes productos con diseño, calidad y precio accesible. Brindando a nuestros accionistas una rentabilidad creciente y sostenible y a nuestros colaboradores la posibilidad de desarrollarse en su área laboral.\n"
 "            "
 msgstr ""
 "\n"
-"We are a Mexican company that seeks to meet the fashion needs child ceremony "
-"in creating products for our customers with design, quality and "
-"affordability. Giving our shareholders a growing and sustainable "
-"profitability and our partners the opportunity to develop in their work area."
+"We are a Mexican company that seeks to meet the fashion needs child ceremony in creating products for our customers with design, quality and affordability. Giving our shareholders a growing and sustainable profitability and our partners the opportunity to develop in their work area."
+
+#: main/templates/product_order.html:5
+msgid "Regresar"
+msgstr "Go back"
+
+#: main/templates/product_order.html:10
+msgid "Detalles"
+msgstr "Details"
+
+#: main/templates/product_order.html:13
+msgid "Introduce el pedido"
+msgstr "Introduce order"
+
+#: main/templates/product_order.html:32
+msgid "Agregar"
+msgstr "Add"
 
 #: monin/settings.py:91
 msgid "Espanol"
