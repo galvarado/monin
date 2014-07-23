@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $('#id_price').focusout(function(){
+    $(this).attr('type', 'text');
     $(this).currency();
   });
   // Only one checkbox can be selected at time
