@@ -154,6 +154,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'static'),
+#)
 
 FROM = 'info@monin.com.mx'
 TO = 'omr_123@hotmail.com' #'guillermoalvarado89@gmail.com'
@@ -179,7 +182,6 @@ AWS_HEADERS = {
 AWS_QUERYSTRING_EXPIRE = 631152000
 AWS_QUERYSTRING_AUTH = False
 AWS_PRELOAD_METADATA = True
-
 
 if os.environ.get('DEVELOPMENT_ENVIRONMENT') and os.environ.get('DEVELOPMENT_ENVIRONMENT') == 'True':
     from local_settings import *
