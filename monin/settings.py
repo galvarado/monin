@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'main',
     'south',
     'registration',
+    'storages',
 
 )
 
@@ -166,6 +167,21 @@ EMAIL_HOST_USER = os.environ.get('SENDGRID_USERNAME')
 EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# AWS Settings
+AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = S3_URL
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_HEADERS = {
+  'Cache-Control': 'max-age=86400',
+}
+AWS_QUERYSTRING_EXPIRE = 631152000
+AWS_QUERYSTRING_AUTH = False
+AWS_PRELOAD_METADATA = True
 
 if os.environ.get('DEVELOPMENT_ENVIRONMENT') and os.environ.get('DEVELOPMENT_ENVIRONMENT') == 'True':
     from local_settings import *
