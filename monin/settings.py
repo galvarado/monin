@@ -183,6 +183,12 @@ AWS_QUERYSTRING_EXPIRE = 631152000
 AWS_QUERYSTRING_AUTH = False
 AWS_PRELOAD_METADATA = True
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
 if os.environ.get('DEVELOPMENT_ENVIRONMENT') and os.environ.get('DEVELOPMENT_ENVIRONMENT') == 'True':
     from local_settings import *
 
